@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
+import { describe, it, expect, beforeEach } from 'vitest'
+import { render, screen } from '@testing-library/react'
 import { WorkbenchLayout } from './WorkbenchLayout'
 import { Registry } from './registry'
 import { PageManager } from './pageManager'
@@ -61,10 +61,6 @@ function setupBasicPage(pageManager: PageManager): void {
 describe('WorkbenchLayout', () => {
   beforeEach(() => {
     clearRegistry()
-  })
-
-  afterEach(() => {
-    cleanup()
   })
 
   it('renders empty shell when no active page', () => {
