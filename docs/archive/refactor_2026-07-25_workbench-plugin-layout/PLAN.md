@@ -9,8 +9,8 @@
 | Phase | 目标 | 预计 Step 数 | 依赖 | 状态 |
 | --- | --- | --- | --- | --- |
 | P1 | Workbench 核心框架（类型 / Emitter / Registry / PageManager / PluginHost / 布局壳） | 6 | — | done |
-| P2 | 现有 4 个区域迁移为内置插件，行为零回归 | 5 | P1 | pending |
-| P3 | 示例第二页面验证「不同页面不同区域内容」+ 收尾 | 3 | P2 | pending |
+| P2 | 现有 4 个区域迁移为内置插件，行为零回归 | 5 | P1 | done |
+| P3 | 示例第二页面验证「不同页面不同区域内容」+ 收尾 | 3 | P2 | done |
 
 ---
 
@@ -35,11 +35,11 @@
 
 | Step | 内容 | 预估 | 依赖 | 状态 |
 | --- | --- | --- | --- | --- |
-| 2.1 | sessions 插件：sidebar ViewContainer「会话」+ 会话列表 view（迁移现 Sidebar，数据源 `mock.ts`），含测试 | 20min | P1 | pending |
-| 2.2 | sessionPage 插件（上）：注册 session page + topbar left/center/right 三段贡献（迁移现 Topbar），含测试 | 20min | 2.1 | pending |
-| 2.3 | sessionPage 插件（下）：content 主视图（迁移现 ContentArea） | 10min | 2.2 | pending |
-| 2.4 | chat 插件：auxiliary 右侧面板（迁移现 ChatPanel，含 mock 流式、按 session 分桶），含测试 | 20min | 2.1 | pending |
-| 2.5 | 收尾清理：`App.tsx` 瘦身、布局 CSS 从 `index.css` 迁入 workbench、删除 `components/` 旧文件，人工跑 `npm run dev` 验证视觉一致 | 15min | 2.2, 2.3, 2.4 | pending |
+| 2.1 | sessions 插件：sidebar ViewContainer「会话」+ 会话列表 view（迁移现 Sidebar，数据源 `mock.ts`），含测试 | 20min | P1 | done |
+| 2.2 | sessionPage 插件（上）：注册 session page + topbar left/center/right 三段贡献（迁移现 Topbar），含测试 | 20min | 2.1 | done |
+| 2.3 | sessionPage 插件（下）：content 主视图（迁移现 ContentArea） | 10min | 2.2 | done |
+| 2.4 | chat 插件：auxiliary 右侧面板（迁移现 ChatPanel，含 mock 流式、按 session 分桶），含测试 | 20min | 2.1 | done |
+| 2.5 | 收尾清理：`App.tsx` 瘦身、布局 CSS 从 `index.css` 迁入 workbench、删除 `components/` 旧文件，人工跑 `npm run dev` 验证视觉一致 | 15min | 2.2, 2.3, 2.4 | done |
 
 ## P3 — 多页面验证与收尾
 
@@ -48,9 +48,9 @@
 
 | Step | 内容 | 预估 | 依赖 | 状态 |
 | --- | --- | --- | --- | --- |
-| 3.1 | agents 示例插件：注册 agents page + 各自的 sidebar view / topbar 贡献 / content view（简单占位内容），sidebar 增加页面切换入口，含测试 | 20min | P2 | pending |
-| 3.2 | 全量回归：`npm run test`、`npm run typecheck`、`npm run dev` 人工验证两页面切换与各区域差异 | 15min | 3.1 | pending |
-| 3.3 | 文档收尾：在项目根新增/更新 `AGENTS.md` 记录 workbench 架构与内置插件编写方式；归档准备 | 10min | 3.2 | pending |
+| 3.1 | agents 示例插件：注册 agents page + 各自的 sidebar view / topbar 贡献 / content view（简单占位内容），sidebar 增加页面切换入口，含测试 | 20min | P2 | done |
+| 3.2 | 全量回归：`npm run test`、`npm run typecheck`、`npm run dev` 人工验证两页面切换与各区域差异 | 15min | 3.1 | done |
+| 3.3 | 文档收尾：在项目根新增/更新 `AGENTS.md` 记录 workbench 架构与内置插件编写方式；归档准备 | 10min | 3.2 | done |
 
 ## 执行约定
 

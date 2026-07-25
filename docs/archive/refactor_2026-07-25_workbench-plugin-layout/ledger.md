@@ -40,3 +40,36 @@
 ## Phase 1 Summary
 
 **P1 complete**: 52 tests, typecheck clean, zero business imports. All 6 Steps done.
+
+### Step 2.1 — complete (commits 85647f4..25eb234, review clean)
+
+- sessions plugin: SessionListView + sessionStore + Plugin
+- SessionListView.test.tsx: 4 tests
+- test-setup.ts: matchMedia polyfill + auto-cleanup
+
+### Steps 2.2-2.5 — complete (commits 25eb234..710e5fd, review clean)
+
+- sessionPage plugin: page + topbar 3 slots + content view
+- chat plugin: ChatPanelView (auxiliary), reads sessionId from store
+- App.tsx: PluginHost + WorkbenchLayout
+- Deleted components/ directory
+- plugins/index.ts: BUILTIN_PLUGINS list
+
+## Phase 2 Summary
+
+**P2 complete**: 59 tests, typecheck clean, build passes. Old components fully migrated.
+
+### Step 3.1 — complete (commits 710e5fd..7dbbf09, review clean)
+
+- agents plugin: sidebar + content + topbar, no auxiliary
+- pageManagerInstance.ts: shared singleton for page switching
+- Page switching: SessionListView ↔ AgentsSidebarView (bidirectional)
+- Build: electron-vite compiles 3126 modules cleanly
+
+### Steps 3.2-3.3 — complete (regression + docs)
+
+- npm run test: 59 passing
+- npm run typecheck: clean
+- npm run build: success
+- AGENTS.md: architecture documentation
+- Archive: docs/ → docs/archive/
