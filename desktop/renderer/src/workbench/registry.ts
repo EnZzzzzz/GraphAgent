@@ -36,6 +36,12 @@ export class Registry {
   private _topbarContribs: TopbarContribution[] = []
 
   private _emitter = new Emitter<void>()
+  private _version = 0
+
+  /** 单调递增的版本号，每次注册/取消注册时 +1。用于 React useSyncExternalStore 对比。 */
+  get version(): number {
+    return this._version
+  }
 
   // ── Registration ──
 
@@ -83,6 +89,7 @@ export class Registry {
   }
 
   private _fireChange(): void {
+    this._version++
     this._emitter.fire()
   }
 
