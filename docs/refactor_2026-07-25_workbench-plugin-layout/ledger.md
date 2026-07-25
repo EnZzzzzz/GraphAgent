@@ -19,3 +19,24 @@
 
 - registry.ts: 单例 Registry（registerContribution/onDidChange/查询/resolvePage）
 - registry.test.ts: 22 tests, typecheck clean, zero business imports
+
+### Step 1.4 — complete (commits facff64..88b7eed, review clean)
+
+- pageManager.ts: activePageId / switchPage / clearPage / onDidChangePage
+- pageManager.test.ts: 7 tests, zero deps on Registry
+
+### Step 1.5 — complete (commits 88b7eed..a3114cd, review clean)
+
+- pluginHost.ts: activateBuiltin(plugins) — PluginContext 构造、Disposable 聚合、错误隔离、逆序 dispose
+- pluginHost.test.ts: 9 tests
+
+### Step 1.6 — complete (commits a3114cd..89fb9c2, review clean)
+
+- useContribution.ts: useObservable hook (useSyncExternalStore wrapper)
+- WorkbenchLayout.tsx: 4-Part shell + topbar 3 slots + dual subscription + version-based snapshot
+- WorkbenchLayout.test.tsx: 6 rendering tests
+- Registry.version: added for snapshot stability
+
+## Phase 1 Summary
+
+**P1 complete**: 52 tests, typecheck clean, zero business imports. All 6 Steps done.

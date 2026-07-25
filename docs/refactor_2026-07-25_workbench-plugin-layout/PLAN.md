@@ -8,7 +8,7 @@
 
 | Phase | 目标 | 预计 Step 数 | 依赖 | 状态 |
 | --- | --- | --- | --- | --- |
-| P1 | Workbench 核心框架（类型 / Emitter / Registry / PageManager / PluginHost / 布局壳） | 6 | — | pending |
+| P1 | Workbench 核心框架（类型 / Emitter / Registry / PageManager / PluginHost / 布局壳） | 6 | — | done |
 | P2 | 现有 4 个区域迁移为内置插件，行为零回归 | 5 | P1 | pending |
 | P3 | 示例第二页面验证「不同页面不同区域内容」+ 收尾 | 3 | P2 | pending |
 
@@ -24,9 +24,9 @@
 | 1.1 | 引入 vitest + @testing-library/react + jsdom，配置 `test` script 与 vitest 配置（renderer 环境） | 15min | — | done |
 | 1.2 | `workbench/types.ts` + `workbench/emitter.ts`：PartId / View / ViewContainer / Page / Contribution / Plugin 类型；Emitter + Disposable，含单测 | 15min | 1.1 | done |
 | 1.3 | `workbench/registry.ts`：registerContribution / onDidChange / 按 point + pageId 解析查询，含单测 | 20min | 1.2 | done |
-| 1.4 | `workbench/pageManager.ts`：activePage 状态、switchPage、onDidChangePage，含单测 | 10min | 1.3 | pending |
-| 1.5 | `workbench/pluginHost.ts`：activateBuiltin(plugins) 统一 activate、Disposable 聚合，含单测 | 10min | 1.3 | pending |
-| 1.6 | `workbench/WorkbenchLayout.tsx` + `useContribution.ts`：4 Part slot 布局壳，渲染当前 page 解析结果（空数据时渲染空壳），含关键渲染测试 | 20min | 1.4 | pending |
+| 1.4 | `workbench/pageManager.ts`：activePage 状态、switchPage、onDidChangePage，含单测 | 10min | 1.3 | done |
+| 1.5 | `workbench/pluginHost.ts`：activateBuiltin(plugins) 统一 activate、Disposable 聚合，含单测 | 10min | 1.3 | done |
+| 1.6 | `workbench/WorkbenchLayout.tsx` + `useContribution.ts`：4 Part slot 布局壳，渲染当前 page 解析结果（空数据时渲染空壳），含关键渲染测试 | 20min | 1.4 | done |
 
 ## P2 — 内置插件迁移
 
