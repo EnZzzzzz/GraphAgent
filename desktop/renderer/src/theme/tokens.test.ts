@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { tokens, layout } from './tokens'
+import { teal } from './themes/teal'
 
 describe('tokens (teal light — 过渡导出)', () => {
   it('包含全部五个域', () => {
@@ -104,5 +105,40 @@ describe('layout（跨主题不变量）', () => {
     expect(layout.auxiliaryMin).toBe(280)
     expect(layout.auxiliaryMax).toBe(640)
     expect(layout.resizeHandleSize).toBe(10)
+  })
+})
+
+describe('teal dark', () => {
+  it('ThemeTokens 全字段有值，无遗漏', () => {
+    const t = teal.dark
+
+    // 每个域都存在
+    expect(t.color).toBeDefined()
+    expect(t.font).toBeDefined()
+    expect(t.radius).toBeDefined()
+    expect(t.spacing).toBeDefined()
+    expect(t.shadow).toBeDefined()
+
+    // color 域 — 全字段非空字符串
+    const colorKeys = Object.keys(t.color) as (keyof typeof t.color)[]
+    expect(colorKeys.length).toBe(22) // 16 original + 6 new (shade30-70 + accent) - 2 (shadowPanel/MenuItem migrated) + 6  = wait, let's count
+    // primary, link, textBase, textSecondary, bgLayout, bgPanel, bgPanelSunken, bgActive,
+    // shellGradientFrom, shellGradientVia, shellGradientTo, handleHover,
+    // bgBubbleAi, bgBubbleUser, borderSubtle, bgAvatar = 16
+    // shade30, shade40, shade50, shade60, shade70, accent = 6
+    // Total = 22
+    for (const k of colorKeys) {
+      const v = t.color[k]
+      expect(typeof v, `color.${k} should be string`).toBe('string')
+      expect(v.length, `color.${k} should be non-empty`).toBeGreaterThan(0)
+    }
+
+    // font 域
+    expect(typeof t.font.family).toBe('string')
+    expect(t.font.sizeBase).toBeGreaterThan(0)
+
+    // 文字与背景对比度常识（浅色字 + 深色底）
+    // textBase 不应等于 bgLayout（否则不可读）
+    expect(t.color.textBase).not.toBe(t.color.bgLayout)
   })
 })
