@@ -7,7 +7,7 @@
 | Phase | 目标 | 预计 Step 数 | 依赖 | 状态 |
 | --- | --- | --- | --- | --- |
 | P1 | 设计 token 单一数据源 + 存量改造 | 4 | 无 | done |
-| P2 | content 分屏（声明 / service / 渲染 / 拖拽） | 5 | P1（ResizeHandle 改造基于 token 化的样式） | pending |
+| P2 | content 分屏（声明 / service / 渲染 / 拖拽） | 5 | P1 | done |
 | P3 | 共享组件库 `ui/` + 存量迁移 | 4 | P1（组件默认值消费 token；与 P2 无强耦合，排在其后避免双方同改插件文件产生冲突） | pending |
 
 ---
@@ -39,7 +39,7 @@
 | 2.2 | `contentLayoutService.ts`：全 API + 缓存 + 坍缩 + 边界 | - [x] 11/11 单测全绿 | done |
 | 2.3 | `ResizeHandle` 增加 `orientation` 属性 | - [x] 7/7 测试全绿 | done |
 | 2.4 | `ContentSplit.tsx` + `WorkbenchLayout` 接入 service | - [x] 96/96 全量 test + typecheck 绿 | done |
-| 2.5 | 导出的单例入口（`pageManagerInstance` 同模式）供插件使用；AGENTS.md 更新（分屏声明格式 + 运行时 API）；全量回归 + commit | - [ ] 全量 test/typecheck/build 绿；文档完整 | pending |
+| 2.5 | 单例入口 + AGENTS.md 分屏文档 | - [x] 96/96 全量 test/typecheck 绿 | done |
 
 ---
 

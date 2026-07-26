@@ -12,7 +12,7 @@
 | 2.2 | complete | b42dc3f..65745ce | review clean |
 | 2.3 | complete | cc0839f..5155896 | review clean |
 | 2.4 | complete | 31209ae..48eb747 | review clean |
-| 2.5 | pending | - | - |
+| 2.5 | complete | aa137bc..f8b90e0 | review clean |
 | 3.1 | pending | - | - |
 | 3.2 | pending | - | - |
 | 3.3 | pending | - | - |
