@@ -24,9 +24,9 @@
 - **过渡兼容（评审裁定 #1，方案 A）**：`tokens.ts` 在 P1 期间保留 `export const tokens = teal.light`，供 `themeConfig.ts`（2.3 才改）与 `cssVariables.ts`（1.2/2.2 改）继续编译；`WorkbenchLayout.tsx` 只消费 `tokens.layout.*`，本 Step 内同步改为 `import { layout } from '../theme/tokens'`；过渡导出在 Step 2.3 移除。
 - 交付物：`tokens.ts`、`themes/teal.ts`（light 部分）、`WorkbenchLayout.tsx` import 修改。
 - 验收：
-  - [ ] teal light 的所有原有 token 值与迁移前逐一相等（零回归）
-  - [ ] 新增域/字段类型完整，`npm run typecheck` 通过（无悬挂 import）
-- 预估：15min | 依赖：无 | 状态：pending
+  - [x] teal light 的所有原有 token 值与迁移前逐一相等（零回归）
+  - [x] 新增域/字段类型完整，`npm run typecheck` 通过（无悬挂 import）
+- 预估：15min | 依赖：无 | 状态：done
 
 ### Step 1.2 — shadow 域迁移与 index.css 改造
 - 内容：`color.shadowPanel`/`shadowMenuItem` 迁入 `shadow` 域（值变为完整 box-shadow 字符串）；`cssVariables.ts` 支持 shadow 域（字符串原样、不加 px）；`index.css` 的 `box-shadow: 0 4px 24px var(--ga-color-shadow-panel)` 等改为 `box-shadow: var(--ga-shadow-panel)`。
