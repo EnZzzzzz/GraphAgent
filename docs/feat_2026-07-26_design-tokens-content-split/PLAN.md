@@ -35,7 +35,7 @@
 
 | Step | 内容 | 验收 | 状态 |
 | --- | --- | --- | --- |
-| 2.1 | `workbench/types.ts`：新增 `ContentLeaf` / `ContentSplit` / `ContentNode`，`Page.layout.content` 放宽为 `ContentNode`；`registry.resolvePage` 适配（content 不再预解析单 view，改为原样传递声明树） | - [ ] 类型单测 + registry 既有测试适配后全绿；旧 `{ viewId }` 声明编译通过 | pending |
+| 2.1 | `workbench/types.ts`：新增 `ContentLeaf` / `ContentSplit` / `ContentNode`，`Page.layout.content` → `ContentNode`；`registry.resolvePage` content 原样传递 | - [x] 类型单测 4/4 + registry 既有 22/22 全绿；旧 `{ viewId }` 声明编译通过 | done |
 | 2.2 | 新建 `workbench/contentLayoutService.ts`：初始化 / 按 pageId 缓存 / `splitLeaf` / `closeLeaf`（含 split 坍缩、禁止关闭最后 leaf）/ `setChildSizes` / `onDidChange`；未注册 viewId 抛错 | - [ ] service 单测覆盖全部 API 与边界（坍缩、缓存保留、错误分支） | pending |
 | 2.3 | `ResizeHandle` 增加 `orientation` 属性（horizontal→col-resize/clientX，vertical→row-resize/clientY），现有调用方适配 | - [ ] handle 拖拽测试覆盖两个方向；sidebar / auxiliary 拖拽无回归 | pending |
 | 2.4 | 新建 `workbench/ContentSplit.tsx`：递归渲染布局树（flex + sizes 权重 + min 尺寸约束 + divider 拖拽换算权重）；`WorkbenchLayout` content Part 接入 service + ContentSplit | - [ ] 渲染测试：嵌套树正确渲染、divider 拖动后 sizes 更新、min 约束生效 | pending |
