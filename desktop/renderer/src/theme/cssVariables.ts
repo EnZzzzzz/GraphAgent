@@ -1,6 +1,7 @@
 import type { ThemeTokens } from './tokens'
 import { layout } from './tokens'
 import { teal } from './themes/teal'
+import { shopify } from './themes/shopify'
 import { getThemeStore } from './themeStore'
 import type { ThemeId, ThemeMode } from './themeStore'
 
@@ -16,10 +17,7 @@ function camelToKebab(str: string): string {
  * 根据 themeId + mode 解析对应的 ThemeTokens。
  */
 function resolveTokens(themeId: ThemeId, mode: ThemeMode): ThemeTokens {
-  // shopify theme imported lazily (Step 3.1)
   if (themeId === 'shopify') {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { shopify } = require('./themes/shopify')
     return shopify[mode]
   }
   return teal[mode]

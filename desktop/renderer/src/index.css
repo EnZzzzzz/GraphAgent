@@ -1,3 +1,6 @@
+/* Inter Variable 字体（shopify 主题） */
+@import '@fontsource-variable/inter';
+
 html,
 body,
 #root {
@@ -16,9 +19,6 @@ body {
 html[data-mode='dark'] body {
   background: #16181d;
 }
-
-/* Inter Variable 字体（shopify 主题） */
-@import '@fontsource-variable/inter';
 
 /* Shopify 主题：全局 ss03 stylistic set */
 html[data-theme='shopify'] body {

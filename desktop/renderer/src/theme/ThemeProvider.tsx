@@ -4,7 +4,14 @@ import zhCN from 'antd/locale/zh_CN'
 import { getThemeStore } from './themeStore'
 import { buildThemeConfig } from './themeConfig'
 import { applyCurrentTheme } from './cssVariables'
-import type { ThemeState } from './themeStore'
+import { teal } from './themes/teal'
+import { shopify } from './themes/shopify'
+import type { ThemeTokens } from './tokens'
+import type { ThemeState, ThemeId, ThemeMode } from './themeStore'
+
+function getTokens(themeId: ThemeId, mode: ThemeMode): ThemeTokens {
+  return themeId === 'shopify' ? shopify[mode] : teal[mode]
+}
 
 interface ThemeProviderProps {
   children: React.ReactNode
@@ -30,11 +37,7 @@ export function ThemeProvider({ children }: ThemeProviderProps): JSX.Element {
 
   const config = useMemo(() => {
     return buildThemeConfig(
-      themeState.themeId === 'teal'
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('./themes/teal').teal[themeState.mode]
-        : // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('./themes/shopify').shopify[themeState.mode],
+      getTokens(themeState.themeId, themeState.mode),
       themeState.mode,
       themeState.themeId
     )
