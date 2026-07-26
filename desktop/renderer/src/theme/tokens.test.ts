@@ -181,3 +181,28 @@ describe('shopify light', () => {
     expect(s.shadow.panel.split(',').length).toBeGreaterThanOrEqual(4)
   })
 })
+
+describe('shopify dark', () => {
+  const d = shopify.dark
+
+  it('关键值与 DESIGN.md canvas-night 轨一致', () => {
+    expect(d.color.bgLayout).toBe('#000000')
+    expect(d.color.bgPanel).toBe('#0a0a0a')
+    expect(d.color.textBase).toBe('#ffffff')
+    expect(d.color.bgActive).toBe('#1e2c31')
+  })
+
+  it('暗轨无绿色强调（DESIGN.md 禁令）', () => {
+    // accent is NOT aloe/pistachio green
+    expect(d.color.accent).toBe('#1e2c31')
+    expect(d.color.accent).not.toBe('#c1fbd4')
+    expect(d.color.accent).not.toBe('#d4f9e0')
+    // bgActive is not green
+    expect(d.color.bgActive).not.toBe('#c1fbd4')
+  })
+
+  it('shadow 为 Level 1 inset 顶边高光，无 drop shadow', () => {
+    expect(d.shadow.panel).toContain('inset')
+    expect(d.shadow.panel).toContain('rgba(255,255,255')
+  })
+})
