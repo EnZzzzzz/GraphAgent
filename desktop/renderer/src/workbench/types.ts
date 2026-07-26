@@ -23,6 +23,21 @@ export interface ViewContainer {
   viewIds: string[]
 }
 
+// ── ContentNode (分屏布局树) ───────────────────────────
+/** content 区域布局声明：叶子节点（单 View）或分屏容器 */
+export type ContentNode = ContentLeaf | ContentSplit
+
+export interface ContentLeaf {
+  viewId: string
+}
+
+export interface ContentSplit {
+  direction: 'row' | 'column'
+  children: ContentNode[]
+  /** flex-grow 权重，缺省全 1，长度须等于 children */
+  sizes?: number[]
+}
+
 // ── Page ────────────────────────────────────────────────
 /** 页面：id + title + 各 Part 的内容装配声明。缺省的 Part 该页面下不渲染 */
 export interface Page {
@@ -30,7 +45,7 @@ export interface Page {
   title: string
   layout: {
     sidebar?: { containerId: string }
-    content?: { viewId: string }
+    content?: ContentNode
     auxiliary?: { viewId: string }
   }
 }

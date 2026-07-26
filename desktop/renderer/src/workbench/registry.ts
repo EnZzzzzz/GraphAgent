@@ -8,7 +8,8 @@ import type {
   ViewContainer,
   TopbarContribution,
   PartId,
-  TopbarSlot
+  TopbarSlot,
+  ContentNode
 } from './types'
 
 // ── PageResolution ──────────────────────────────────────
@@ -16,7 +17,7 @@ import type {
 export interface PageResolution {
   pageId: string
   sidebar?: { container: ViewContainer; views: View[] }
-  content?: { view: View }
+  content?: ContentNode
   auxiliary?: { view: View }
   topbar: {
     left: Array<{ component: ComponentType; order: number }>
@@ -154,12 +155,9 @@ export class Registry {
       }
     }
 
-    // Content
+    // Content — 原样传递声明树，不再预解析单 view
     if (page.layout.content) {
-      const view = this._views.get(page.layout.content.viewId)
-      if (view) {
-        resolution.content = { view }
-      }
+      resolution.content = page.layout.content
     }
 
     // Auxiliary

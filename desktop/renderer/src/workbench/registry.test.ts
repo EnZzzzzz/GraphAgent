@@ -258,7 +258,7 @@ describe('Registry', () => {
       expect(resolution.sidebar!.views[0].id).toBe('session-list')
 
       expect(resolution.content).toBeDefined()
-      expect(resolution.content!.view.id).toBe('chat-view')
+      expect(resolution.content).toEqual({ viewId: 'chat-view' })
 
       expect(resolution.auxiliary).toBeDefined()
       expect(resolution.auxiliary!.view.id).toBe('chat-panel')
@@ -302,7 +302,7 @@ describe('Registry', () => {
       expect(resolution.sidebar).toBeUndefined()
     })
 
-    it('silently degrades when referenced view does not exist in content', () => {
+    it('passes through content node as-is (no view resolution at resolve time)', () => {
       const r = freshRegistry()
       r.registerContribution({
         point: 'workbench.pages',
@@ -314,7 +314,8 @@ describe('Registry', () => {
       })
 
       const resolution = r.resolvePage('p')!
-      expect(resolution.content).toBeUndefined()
+      // ContentNode is passed through as-is; view existence is validated at render time
+      expect(resolution.content).toEqual({ viewId: 'no-such-view' })
     })
 
     it('silently degrades when a viewId inside container does not exist (skips missing views)', () => {
