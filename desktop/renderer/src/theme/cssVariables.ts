@@ -1,4 +1,8 @@
-import { tokens, layout } from './tokens'
+import type { ThemeTokens } from './tokens'
+import { layout } from './tokens'
+import { teal } from './themes/teal'
+import { getThemeStore } from './themeStore'
+import type { ThemeId, ThemeMode } from './themeStore'
 
 /**
  * 将 camelCase 字符串转换为 kebab-case。
@@ -9,14 +13,27 @@ function camelToKebab(str: string): string {
 }
 
 /**
- * 把 tokens + layout 拍平为 `--ga-<域>-<kebab名>` 格式的 CSS 自定义属性，
+ * 根据 themeId + mode 解析对应的 ThemeTokens。
+ */
+function resolveTokens(themeId: ThemeId, mode: ThemeMode): ThemeTokens {
+  // shopify theme imported lazily (Step 3.1)
+  if (themeId === 'shopify') {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { shopify } = require('./themes/shopify')
+    return shopify[mode]
+  }
+  return teal[mode]
+}
+
+/**
+ * 把 ThemeTokens + layout 拍平为 `--ga-<域>-<kebab名>` 格式的 CSS 自定义属性，
  * 写入 `document.documentElement.style.setProperty(...)`。
- * 数值 token（font/radius/spacing/layout 域）自动附加 px 单位；
+ * 数值 token（font/radius/spacing 域）自动附加 px 单位；
  * shadow 域为完整 box-shadow 字符串，原样输出不加 px。
  *
  * CSS 变量是插件消费的公开契约。
  */
-export function applyCssVariables(): void {
+export function applyCssVariables(tokens: ThemeTokens): void {
   const root = document.documentElement
   const lengthDomains = new Set(['font', 'radius', 'spacing'])
 
@@ -35,4 +52,14 @@ export function applyCssVariables(): void {
     const varName = `--ga-layout-${camelToKebab(key)}`
     root.style.setProperty(varName, `${(value as number)}px`)
   }
+}
+
+/**
+ * 从 themeStore 取当前主题，重放全部 CSS 变量。
+ * 用于启动时和切换主题时调用。
+ */
+export function applyCurrentTheme(): void {
+  const state = getThemeStore().getTheme()
+  const tokens = resolveTokens(state.themeId, state.mode)
+  applyCssVariables(tokens)
 }

@@ -4,10 +4,10 @@ import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import App from './App'
 import { themeConfig } from './theme/themeConfig'
-import { applyCssVariables } from './theme/cssVariables'
+import { applyCurrentTheme } from './theme/cssVariables'
 import './index.css'
 
-applyCssVariables()
+applyCurrentTheme()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

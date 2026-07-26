@@ -1,5 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { applyCssVariables } from './cssVariables'
+import { teal } from './themes/teal'
+
+const tealLight = teal.light
 
 describe('applyCssVariables', () => {
   beforeEach(() => {
@@ -13,7 +16,7 @@ describe('applyCssVariables', () => {
   })
 
   it('在 :root 上设置 CSS 变量，命名格式为 --ga-<域>-<kebab名>', () => {
-    applyCssVariables()
+    applyCssVariables(tealLight)
 
     const style = document.documentElement.style
 
@@ -45,7 +48,7 @@ describe('applyCssVariables', () => {
   })
 
   it('每个域都有对应 CSS 变量（全覆盖）', () => {
-    applyCssVariables()
+    applyCssVariables(tealLight)
     const style = document.documentElement.style
 
     // color 域
@@ -151,10 +154,19 @@ describe('applyCssVariables', () => {
   })
 
   it('shadow 域不加 px（字符串原样输出）', () => {
-    applyCssVariables()
+    applyCssVariables(tealLight)
     const style = document.documentElement.style
 
     expect(style.getPropertyValue('--ga-shadow-panel')).toBe('0 4px 24px rgba(30, 40, 80, 0.06)')
     expect(style.getPropertyValue('--ga-shadow-menu-item')).toBe('0 2px 10px rgba(30, 40, 80, 0.08)')
+  })
+
+  it('传入不同 token 集产生不同 CSS 变量值（参数化验证）', () => {
+    applyCssVariables(teal.dark)
+    const style = document.documentElement.style
+
+    // dark 背景不同于 light
+    expect(style.getPropertyValue('--ga-color-bg-panel')).toBe('#1e2128')
+    expect(style.getPropertyValue('--ga-color-text-base')).toBe('#e1e3e8')
   })
 })
