@@ -9,7 +9,7 @@
 | 1.3 | complete | 45b1ee3..42d06cd | review clean |
 | 1.4 | complete | 582c135..23a6715 | review clean |
 | 2.1 | complete | 424034b..1405b84 | review clean (WorkbenchLayout break expected)
-| 2.2 | pending | - | - |
+| 2.2 | complete | b42dc3f..65745ce | review clean |
 | 2.3 | pending | - | - |
 | 2.4 | pending | - | - |
 | 2.5 | pending | - | - |
