@@ -1,9 +1,13 @@
-import { useMemo, useState, useSyncExternalStore } from 'react'
+import { useMemo, useState, useSyncExternalStore, useEffect, useRef } from 'react'
 import { Registry } from './registry'
 import { ResizeHandle } from './ResizeHandle'
+import { ContentSplit } from './ContentSplit'
+import { ContentLayoutService } from './contentLayoutService'
 import type { PageManager } from './pageManager'
 import type { PageResolution } from './registry'
 import { tokens } from '../theme/tokens'
+
+const contentLayoutService = new ContentLayoutService()
 
 interface WorkbenchLayoutProps {
   pageManager: PageManager
@@ -44,6 +48,17 @@ export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Elem
   const resolution = usePageResolution(pageManager)
   const [sidebarWidth, setSidebarWidth] = useState<number>(tokens.layout.sidebarDefault)
   const [auxiliaryWidth, setAuxiliaryWidth] = useState<number>(tokens.layout.auxiliaryDefault)
+
+  // Activate page layout on resolution change
+  const prevPageIdRef = useRef<string | null>(null)
+  useEffect(() => {
+    if (resolution && resolution.pageId !== prevPageIdRef.current) {
+      prevPageIdRef.current = resolution.pageId
+      if (resolution.content) {
+        contentLayoutService.activatePage(resolution.pageId, resolution.content)
+      }
+    }
+  }, [resolution])
 
   return (
     <div className="app-shell">
@@ -89,7 +104,12 @@ export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Elem
         <div className="main-row">
           {/* Content */}
           <main className="panel panel-content">
-            {resolution?.content && <resolution.content.view.component />}
+            {resolution?.content && (
+              <ContentSplit
+                service={contentLayoutService}
+                pageId={resolution.pageId}
+              />
+            )}
           </main>
 
           {/* Auxiliary */}
