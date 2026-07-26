@@ -1,9 +1,11 @@
 import { Button, Typography, Tooltip } from '../../ui'
 import { CaretRightOutlined, MoreOutlined, CheckCircleFilled } from '../../ui/icons'
+import { ThemeSwitcher } from './ThemeSwitcher'
 
 export function SessionTopbarRight(): JSX.Element {
   return (
     <>
+      <ThemeSwitcher />
       <Typography.Text type="secondary" style={{ fontSize: 'var(--ga-font-size-sm)' }}>
         <CheckCircleFilled style={{ color: 'var(--ga-color-primary)', marginRight: 4 }} />
         已自动保存

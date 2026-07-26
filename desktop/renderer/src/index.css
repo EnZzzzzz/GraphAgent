@@ -9,6 +9,12 @@ body,
 body {
   -webkit-font-smoothing: antialiased;
   user-select: none;
+  background: var(--ga-color-bg-layout);
+}
+
+/* FOUC 防护：React 未加载时用 data-mode 硬编码背景 */
+html[data-mode='dark'] body {
+  background: #16181d;
 }
 
 /* 参考 HiAgents：淡紫灰渐变底 + 悬浮白色圆角面板，栏间留缝、无硬边框 */

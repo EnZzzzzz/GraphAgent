@@ -13,5 +13,6 @@ export {
   MoreOutlined,
   CheckCircleFilled,
   SearchOutlined,
-  CloseCircleFilled
+  CloseCircleFilled,
+  BgColorsOutlined
 } from '@ant-design/icons'
