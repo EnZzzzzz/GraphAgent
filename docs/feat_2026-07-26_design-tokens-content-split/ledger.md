@@ -7,7 +7,7 @@
 | 1.1 | complete | 2e300f3..5dfec5f | review clean |
 | 1.2 | complete | 559b680..c60f283 | review clean |
 | 1.3 | complete | 45b1ee3..42d06cd | review clean |
-| 1.4 | pending | - | - |
+| 1.4 | complete | 582c135..23a6715 | review clean |
 | 2.1 | pending | - | - |
 | 2.2 | pending | - | - |
 | 2.3 | pending | - | - |

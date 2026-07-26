@@ -6,7 +6,7 @@
 
 | Phase | 目标 | 预计 Step 数 | 依赖 | 状态 |
 | --- | --- | --- | --- | --- |
-| P1 | 设计 token 单一数据源 + 存量改造 | 4 | 无 | pending |
+| P1 | 设计 token 单一数据源 + 存量改造 | 4 | 无 | done |
 | P2 | content 分屏（声明 / service / 渲染 / 拖拽） | 5 | P1（ResizeHandle 改造基于 token 化的样式） | pending |
 | P3 | 共享组件库 `ui/` + 存量迁移 | 4 | P1（组件默认值消费 token；与 P2 无强耦合，排在其后避免双方同改插件文件产生冲突） | pending |
 
@@ -22,7 +22,7 @@
 | 1.1 | 新建 `theme/tokens.ts`：按 SPEC 4.1 分域定义全部 token（初值=现状字面量）；新建 `theme/cssVariables.ts`（token 拍平为 `--ga-*` + `applyCssVariables()`） | - [x] 映射单测通过（每个 token 都有对应 CSS 变量，命名符合 `--ga-<域>-<名>`） | done |
 | 1.2 | `main.tsx` 启动时调用 `applyCssVariables()`；新建 `theme/themeConfig.ts` 从 tokens 派生 antd 配置，删除旧 `theme.ts` | - [x] 派生值与原配置逐字段等价的单测通过；typecheck 绿 | done |
 | 1.3 | `index.css` 全部设计值字面量改 `var(--ga-*)`；`PART_WIDTH_LIMITS` 移入 `tokens.layout`，`WorkbenchLayout.tsx` 改 import | - [x] grep 硬编码色值/间距零命中（token 文件除外）；既有测试全绿 | done |
-| 1.4 | 业务组件内联样式改消费 token，范围=全部已盘点文件：`SessionContentView`、`ChatPanelView`、`SessionListView`、`SessionTopbarRight`（清单见 SPEC 4.1 存量改造）；更新 AGENTS.md「设计 token」章节（消费契约：CSS 变量优先，TS 可 import） | - [ ] 全量 test/typecheck/build 绿；grep `#[0-9a-fA-F]{3,8}` 在 src 零命中（tokens 及测试除外）；commit | pending |
+| 1.4 | `SessionContentView`、`ChatPanelView`、`SessionListView`、`SessionTopbarRight` 内联样式 → CSS 变量；AGENTS.md 添加「设计 token」章节 | - [x] 全量 test/typecheck/build 绿；grep 零命中 | done |
 
 ---
 
