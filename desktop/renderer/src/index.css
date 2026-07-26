@@ -14,24 +14,29 @@ body {
 /* 参考 HiAgents：淡紫灰渐变底 + 悬浮白色圆角面板，栏间留缝、无硬边框 */
 .app-shell {
   display: flex;
-  gap: 12px;
+  gap: var(--ga-spacing-shell-gap);
   height: 100vh;
-  padding: 12px;
+  padding: var(--ga-spacing-shell-padding);
   box-sizing: border-box;
-  background: linear-gradient(135deg, #e9ecf6 0%, #f4f5fa 60%, #eef7f4 100%);
+  background: linear-gradient(
+    135deg,
+    var(--ga-color-shell-gradient-from) 0%,
+    var(--ga-color-shell-gradient-via) 60%,
+    var(--ga-color-shell-gradient-to) 100%
+  );
 }
 
 .panel {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(30, 40, 80, 0.06);
+  background: var(--ga-color-bg-panel);
+  border-radius: var(--ga-radius-panel);
+  box-shadow: 0 4px 24px var(--ga-color-shadow-panel);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
 .panel-sidebar {
-  width: 232px;
+  width: var(--ga-layout-sidebar-default);
   flex: none;
   /* 融入背景：无白底、无投影 */
   background: transparent;
@@ -44,17 +49,17 @@ body {
 }
 
 .panel-sidebar .ant-menu-item-selected {
-  box-shadow: 0 2px 10px rgba(30, 40, 80, 0.08);
+  box-shadow: 0 2px 10px var(--ga-color-shadow-menu-item);
 }
 
 .panel-sidebar .ant-menu-item-selected .anticon {
-  color: #2ed3b0;
+  color: var(--ga-color-primary);
 }
 
 /* 参考 HiAgents：顶部导航条融入背景，兼作窗口拖拽区（无边框窗口） */
 .topbar {
   flex: none;
-  height: 56px;
+  height: var(--ga-layout-topbar-height);
   display: flex;
   align-items: center;
   padding: 8px 12px 0;
@@ -92,13 +97,13 @@ body {
   gap: 6px;
   padding: 4px 14px;
   border-radius: 999px;
-  font-size: 13px;
-  color: #8a8f9c;
+  font-size: var(--ga-font-size-small);
+  color: var(--ga-color-text-secondary);
 }
 
 .topbar .step-active {
-  background: #e4f7f1;
-  color: #12a98c;
+  background: var(--ga-color-bg-active);
+  color: var(--ga-color-link);
   font-weight: 600;
 }
 
@@ -107,14 +112,14 @@ body {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--ga-spacing-shell-gap);
 }
 
 .main-row {
   flex: 1;
   min-height: 0;
   display: flex;
-  gap: 12px;
+  gap: var(--ga-spacing-shell-gap);
 }
 
 .panel-content {
@@ -124,20 +129,20 @@ body {
 }
 
 .panel-chat {
-  width: 400px;
+  width: var(--ga-layout-auxiliary-default);
   flex: none;
 }
 
 /* Part 拖拽调宽手柄：10px 透明热区，负 margin 抵消两侧 12px flex gap（12+10-22+12=12），视觉间距不变 */
 .part-resize-handle {
   flex: none;
-  width: 10px;
+  width: var(--ga-layout-resize-handle-size);
   margin: 0 -11px;
   cursor: col-resize;
   z-index: 10;
-  border-radius: 5px;
+  border-radius: var(--ga-radius-handle);
 }
 
 .part-resize-handle:hover {
-  background: rgba(46, 211, 176, 0.25);
+  background: var(--ga-color-handle-hover);
 }
