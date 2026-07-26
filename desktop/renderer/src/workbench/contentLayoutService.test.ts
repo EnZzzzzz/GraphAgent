@@ -60,20 +60,29 @@ describe('ContentLayoutService', () => {
       expect(restored).toEqual(initial)
     })
 
-    it('re-initializes when activatePage called again for same pageId', () => {
+    it('preserves layout when activatePage called again for same pageId', () => {
       const svc = freshService()
       clearAndRegisterView('v1')
       clearAndRegisterView('v2')
 
       svc.activatePage('page1', { viewId: 'v1' })
       const first = svc.getLayout('page1')
-      svc.activatePage('page1', { viewId: 'v2' }) // re-init
+      svc.activatePage('page1', { viewId: 'v2' }) // re-activate with different root
       const second = svc.getLayout('page1')
 
-      // leafId should be different (new initialization)
-      if (first!.type === 'leaf' && second!.type === 'leaf') {
-        expect(first!.leafId).not.toBe(second!.leafId)
-      }
+      // Layout is preserved (not re-initialized) — SPEC: 切页返回后布局保留
+      expect(second).toEqual(first)
+    })
+
+    it('fires onDidChange on activatePage', () => {
+      const svc = freshService()
+      clearAndRegisterView('v1')
+
+      let fired = false
+      svc.onDidChange(() => { fired = true })
+      svc.activatePage('page1', { viewId: 'v1' })
+
+      expect(fired).toBe(true)
     })
   })
 

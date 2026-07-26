@@ -94,7 +94,7 @@ export function ChatPanelView(): JSX.Element {
               typing: { step: 2, interval: 30 },
               style: { maxWidth: '92%' },
               styles: {
-                content: { background: 'var(--ga-color-bg-bubble-ai)', borderRadius: 12, color: 'var(--ga-color-text-base)' }
+                content: { background: 'var(--ga-color-bg-bubble-ai)', borderRadius: 'var(--ga-radius-message)', color: 'var(--ga-color-text-base)' }
               }
             },
             user: {
@@ -102,7 +102,7 @@ export function ChatPanelView(): JSX.Element {
               avatar: { icon: <UserOutlined />, style: { background: 'var(--ga-color-text-base)' } },
               style: { maxWidth: '92%' },
               styles: {
-                content: { background: 'var(--ga-color-bg-bubble-user)', borderRadius: 12, color: 'var(--ga-color-text-base)' }
+                content: { background: 'var(--ga-color-bg-bubble-user)', borderRadius: 'var(--ga-radius-message)', color: 'var(--ga-color-text-base)' }
               }
             }
           }}

@@ -55,5 +55,9 @@ export function ResizeHandle({
     [getWidth, setWidth, direction, min, max, isHorizontal]
   )
 
-  return <div className="part-resize-handle" onMouseDown={onMouseDown} />
+  const handleStyle: React.CSSProperties = isHorizontal
+    ? {}
+    : { width: '100%', height: 'var(--ga-layout-resize-handle-size)', margin: '-11px 0' }
+
+  return <div className="part-resize-handle" style={handleStyle} onMouseDown={onMouseDown} />
 }

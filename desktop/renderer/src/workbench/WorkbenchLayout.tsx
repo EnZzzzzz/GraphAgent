@@ -2,12 +2,10 @@ import { useMemo, useState, useSyncExternalStore, useEffect, useRef } from 'reac
 import { Registry } from './registry'
 import { ResizeHandle } from './ResizeHandle'
 import { ContentSplit } from './ContentSplit'
-import { ContentLayoutService } from './contentLayoutService'
+import { getContentLayoutService } from '../contentLayoutServiceInstance'
 import type { PageManager } from './pageManager'
 import type { PageResolution } from './registry'
 import { tokens } from '../theme/tokens'
-
-const contentLayoutService = new ContentLayoutService()
 
 interface WorkbenchLayoutProps {
   pageManager: PageManager
@@ -55,7 +53,7 @@ export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Elem
     if (resolution && resolution.pageId !== prevPageIdRef.current) {
       prevPageIdRef.current = resolution.pageId
       if (resolution.content) {
-        contentLayoutService.activatePage(resolution.pageId, resolution.content)
+        getContentLayoutService().activatePage(resolution.pageId, resolution.content)
       }
     }
   }, [resolution])
@@ -106,7 +104,7 @@ export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Elem
           <main className="panel panel-content">
             {resolution?.content && (
               <ContentSplit
-                service={contentLayoutService}
+                service={getContentLayoutService()}
                 pageId={resolution.pageId}
               />
             )}

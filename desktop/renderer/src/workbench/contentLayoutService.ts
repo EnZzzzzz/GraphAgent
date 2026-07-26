@@ -48,10 +48,13 @@ export class ContentLayoutService {
 
   /**
    * 用 Page 声明初始化该页布局树，为每个 leaf 生成稳定 leafId。
-   * 同一 pageId 重复调用会重置布局。
+   * 若该 pageId 已有缓存布局则保留（切页返回场景），不重复初始化。
    */
   activatePage(pageId: string, rootNode: ContentNode): void {
-    this._layouts.set(pageId, this._initNode(rootNode))
+    if (!this._layouts.has(pageId)) {
+      this._layouts.set(pageId, this._initNode(rootNode))
+    }
+    this._fireChange()
   }
 
   /** 获取当前运行时布局树 */
@@ -139,6 +142,12 @@ export class ContentLayoutService {
       throw new Error(
         `setChildSizes: sizes length (${sizes.length}) must equal children count (${split.children.length})`
       )
+    }
+
+    for (const s of sizes) {
+      if (typeof s !== 'number' || isNaN(s) || s <= 0) {
+        throw new Error(`setChildSizes: all sizes must be positive numbers, got ${s}`)
+      }
     }
 
     split.sizes = sizes

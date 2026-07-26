@@ -24,10 +24,10 @@ export function SessionListView(): JSX.Element {
         <Avatar
           shape="square"
           size={28}
-          style={{ background: 'var(--ga-color-primary)', borderRadius: 8 }}
+          style={{ background: 'var(--ga-color-primary)', borderRadius: 'var(--ga-radius-avatar)' }}
           icon={<RobotFilled />}
         />
-        <Typography.Text strong style={{ fontSize: 16, color: 'var(--ga-color-text-base)' }}>
+        <Typography.Text strong style={{ fontSize: 'var(--ga-font-size-lg)', color: 'var(--ga-color-text-base)' }}>
           GraphAgent
         </Typography.Text>
       </div>
@@ -37,7 +37,7 @@ export function SessionListView(): JSX.Element {
           type="primary"
           icon={<PlusOutlined />}
           block
-          style={{ background: 'var(--ga-color-text-base)', borderRadius: 10 }}
+          style={{ background: 'var(--ga-color-text-base)', borderRadius: 'var(--ga-radius-control)' }}
         >
           新建会话
         </Button>
@@ -67,7 +67,7 @@ export function SessionListView(): JSX.Element {
         <Avatar size={28} style={{ background: 'var(--ga-color-bg-avatar)', color: 'var(--ga-color-text-secondary)' }}>
           我
         </Avatar>
-        <Typography.Text type="secondary" style={{ fontSize: 13 }}>
+        <Typography.Text type="secondary" style={{ fontSize: 'var(--ga-font-size-small)' }}>
           本地用户
         </Typography.Text>
       </div>

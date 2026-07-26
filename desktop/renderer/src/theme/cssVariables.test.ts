@@ -26,19 +26,19 @@ describe('applyCssVariables', () => {
     expect(style.getPropertyValue('--ga-color-handle-hover')).toBe('rgba(46, 211, 176, 0.25)')
 
     // 抽查 font 域
-    expect(style.getPropertyValue('--ga-font-size-base')).toBe('14')
-    expect(style.getPropertyValue('--ga-font-size-lg')).toBe('16')
+    expect(style.getPropertyValue('--ga-font-size-base')).toBe('14px')
+    expect(style.getPropertyValue('--ga-font-size-lg')).toBe('16px')
 
     // 抽查 radius 域
-    expect(style.getPropertyValue('--ga-radius-panel')).toBe('16')
-    expect(style.getPropertyValue('--ga-radius-control')).toBe('10')
+    expect(style.getPropertyValue('--ga-radius-panel')).toBe('16px')
+    expect(style.getPropertyValue('--ga-radius-control')).toBe('10px')
 
     // 抽查 spacing 域
-    expect(style.getPropertyValue('--ga-spacing-shell-gap')).toBe('12')
+    expect(style.getPropertyValue('--ga-spacing-shell-gap')).toBe('12px')
 
     // 抽查 layout 域
-    expect(style.getPropertyValue('--ga-layout-topbar-height')).toBe('56')
-    expect(style.getPropertyValue('--ga-layout-sidebar-default')).toBe('232')
+    expect(style.getPropertyValue('--ga-layout-topbar-height')).toBe('56px')
+    expect(style.getPropertyValue('--ga-layout-sidebar-default')).toBe('232px')
   })
 
   it('每个域都有对应 CSS 变量（全覆盖）', () => {

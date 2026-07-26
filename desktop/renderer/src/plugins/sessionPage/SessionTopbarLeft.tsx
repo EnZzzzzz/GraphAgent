@@ -10,7 +10,7 @@ export function SessionTopbarLeft(): JSX.Element {
   return (
     <>
       <Button type="text" size="small" icon={<LeftOutlined />} />
-      <Typography.Text strong style={{ fontSize: 15, margin: '0 4px' }} ellipsis>
+      <Typography.Text strong style={{ fontSize: 'var(--ga-font-size-md)', margin: '0 4px' }} ellipsis>
         {title}
       </Typography.Text>
       <Button type="text" size="small" icon={<EditOutlined />} />

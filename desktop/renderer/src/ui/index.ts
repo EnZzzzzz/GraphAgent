@@ -14,6 +14,9 @@ export type { CardProps } from 'antd'
 export { Empty } from 'antd'
 export type { EmptyProps } from 'antd'
 
+// Composite components
+export { TopbarSearchInput } from './TopbarSearchInput'
+
 // @ant-design/x
 export { Bubble, Sender } from '@ant-design/x'
 export type { BubbleProps } from '@ant-design/x'

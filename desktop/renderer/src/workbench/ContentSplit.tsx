@@ -92,14 +92,28 @@ function SplitView({
         const totalPx = isRow ? container.clientWidth : container.clientHeight
         if (totalPx <= 0) return
 
-        const weightDelta = deltaPx / totalPx
+        const totalWeight = split.sizes.reduce((a, b) => a + b, 0)
+        const weightDelta = (deltaPx * totalWeight) / totalPx
         const sizes = [...split.sizes]
         const leftIdx = index
         const rightIdx = index + 1
 
         const minWeight = LEAF_MIN_SIZE / totalPx
-        sizes[leftIdx] = Math.max(minWeight, sizes[leftIdx] + weightDelta)
-        sizes[rightIdx] = Math.max(minWeight, sizes[rightIdx] - weightDelta)
+        let leftTarget = sizes[leftIdx] + weightDelta
+        let rightTarget = sizes[rightIdx] - weightDelta
+
+        // Symmetric clamp: deficit from one side goes to the other
+        if (leftTarget < minWeight) {
+          rightTarget -= minWeight - leftTarget
+          leftTarget = minWeight
+        }
+        if (rightTarget < minWeight) {
+          leftTarget -= minWeight - rightTarget
+          rightTarget = minWeight
+        }
+
+        sizes[leftIdx] = Math.max(minWeight, leftTarget)
+        sizes[rightIdx] = Math.max(minWeight, rightTarget)
 
         service.setChildSizes(split.splitId, sizes)
       },
