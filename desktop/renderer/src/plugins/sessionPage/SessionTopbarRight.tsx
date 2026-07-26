@@ -1,5 +1,5 @@
-import { Button, Tooltip, Typography } from 'antd'
-import { CaretRightOutlined, MoreOutlined, CheckCircleFilled } from '@ant-design/icons'
+import { Button, Typography, Tooltip } from '../../ui'
+import { CaretRightOutlined, MoreOutlined, CheckCircleFilled } from '../../ui/icons'
 
 export function SessionTopbarRight(): JSX.Element {
   return (

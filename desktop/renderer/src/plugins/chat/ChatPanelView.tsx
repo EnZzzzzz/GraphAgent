@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Bubble, Sender } from '@ant-design/x'
-import { RobotOutlined, UserOutlined } from '@ant-design/icons'
-import type { GetProp } from 'antd'
+import { Bubble, Sender } from '../../ui'
+import { RobotOutlined, UserOutlined } from '../../ui/icons'
 import { useActiveSessionId } from '../sessions/sessionStore'
 
-type BubbleDataType = GetProp<typeof Bubble.List, 'items'>[number]
+type BubbleDataType = { key: string; role: string; content?: string; loading?: boolean }
 
 interface ChatMessage extends BubbleDataType {
   key: string

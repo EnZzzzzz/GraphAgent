@@ -1,4 +1,6 @@
-import { Card, Empty, Typography } from 'antd'
+import { Card } from '../../ui/Card'
+import { Empty } from '../../ui/Empty'
+import { Typography } from '../../ui/Typography'
 import { getActiveSessionId } from '../sessions/sessionStore'
 
 export function SessionContentView(): JSX.Element {

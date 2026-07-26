@@ -165,3 +165,39 @@ svc.onDidChange(() => { /* re-render */ })
 ```
 
 分屏 divider 可拖拽调节比例，每个 leaf 有 120px 最小尺寸约束。
+
+## 组件库 `ui/`
+
+项目内置共享组件库 `desktop/renderer/src/ui/`，是项目唯一的 UI 组件出口。插件应优先从 `ui/` 导入预置组件，而非直接 import antd。
+
+### 导入方式
+
+```ts
+// 从统一入口导入（推荐）
+import { Button, Card, Typography } from '../../ui'
+
+// 图标从 ui/icons 统一出口
+import { RobotOutlined, PlusOutlined } from '../../ui/icons'
+
+// @ant-design/x 组件
+import { Bubble, Sender } from '../../ui'
+```
+
+### 可用组件
+
+| 组件 | 说明 |
+| --- | --- |
+| `Button` | 薄包装 antd Button，透出全部 props |
+| `Typography` | antd Typography |
+| `Avatar` | antd Avatar |
+| `Menu` | antd Menu |
+| `Tooltip` | antd Tooltip |
+| `Card` | antd Card |
+| `Empty` | antd Empty |
+| `TopbarSearchInput` | 组合组件：顶部搜索框（示范消费 token + 组合 antd Input + icons） |
+| `Bubble` / `Sender` | 从 @ant-design/x re-export |
+| `ui/icons` | 常用 @ant-design/icons 统一出口 |
+
+### Import 约束
+
+只有 `ui/`、`main.tsx`（ConfigProvider）、`theme/`（基础设施层 token 派生配置）允许直接 import `antd` / `@ant-design/x` / `@ant-design/icons`。

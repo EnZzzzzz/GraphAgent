@@ -1,5 +1,5 @@
-import { Button, Typography } from 'antd'
-import { LeftOutlined, EditOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
+import { Button, Typography } from '../../ui'
+import { LeftOutlined, EditOutlined, UndoOutlined, RedoOutlined } from '../../ui/icons'
 import { MOCK_SESSIONS } from '../../mock'
 import { getActiveSessionId } from '../sessions/sessionStore'
 

@@ -1,5 +1,8 @@
-import { Avatar, Button, Menu, Typography } from 'antd'
-import { MessageOutlined, PlusOutlined, RobotFilled } from '@ant-design/icons'
+import { Avatar } from '../../ui/Avatar'
+import { Button } from '../../ui/Button'
+import { Menu } from '../../ui/Menu'
+import { Typography } from '../../ui/Typography'
+import { MessageOutlined, PlusOutlined, RobotFilled } from '../../ui/icons'
 import { MOCK_SESSIONS } from '../../mock'
 import { useActiveSessionId } from './sessionStore'
 

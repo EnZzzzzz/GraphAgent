@@ -11,5 +11,7 @@ export {
   RedoOutlined,
   CaretRightOutlined,
   MoreOutlined,
-  CheckCircleFilled
+  CheckCircleFilled,
+  SearchOutlined,
+  CloseCircleFilled
 } from '@ant-design/icons'
