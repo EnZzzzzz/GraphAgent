@@ -62,3 +62,35 @@
 - ThemeSwitcher.tsx: cycles 4 theme×mode combos in topbar right
 - ui/icons: BgColorsOutlined added
 - 129/129 tests passing, typecheck clean
+
+## Step 3.1: complete
+- commits: 076bb14..bd30a99
+- themes/shopify.ts: light per DESIGN.md transactional track
+- 134/134 tests passing, typecheck clean
+
+## Step 3.2: complete
+- commits: bd30a99..2f4dd19
+- shopify dark: canvas-night, no green, Level 1 inset shadows
+- 137/137 tests passing, typecheck clean
+
+## Step 3.3: complete
+- commits: 2f4dd19..6e7c467
+- @fontsource-variable/inter installed, imported in index.css
+- ss03 scoped to [data-theme='shopify']
+
+## Step 3.4: complete
+- commits: 2f4dd19..6e7c467
+- buildThemeConfig per-theme overrides: shopify Button pill/Card 12/global 8; teal unchanged
+- themeConfig.test.ts: per-theme assertions
+- 142/142 tests passing, typecheck clean
+
+## Step 3.5: visual walkthrough (pending manual verification)
+- 4-combo visual walkthrough deferred to manual run (npm run dev + screenshots)
+
+## Step 4.1: complete
+- commits: 6e7c467..46c7155
+- AGENTS.md updated: ThemeTokens, layout, themes/, themeStore, how to add theme
+
+## Step 4.2: complete
+- npm run typecheck ✅ | npm run test 142/142 ✅ | npm run build ✅
+- Documentation archived to docs/archive/

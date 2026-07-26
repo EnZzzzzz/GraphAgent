@@ -109,40 +109,40 @@
 - 内容：按 DESIGN.md 浅色交易轨定义：`bgPanel #ffffff`、`bgLayout #fbfbf5`(cream)、`textBase #000000`(ink)、shade 灰阶、`borderSubtle #e4e4e7`、`accent #c1fbd4`(aloe)、`primary #000000`（黑主按钮）、阴影 = Level 3 多层小阴影堆叠；spacing/font/radius 按 DESIGN.md 标尺。
 - 交付物：`themes/shopify.ts` 的 `light`。
 - 验收：
-  - [ ] 关键值与 DESIGN.md 一致（颜色逐个对照）
-  - [ ] tokens 测试新增 shopify light 断言并全绿
-- 预估：15min | 依赖：P2 | 状态：pending
+  - [x] 关键值与 DESIGN.md 一致（颜色逐个对照）
+  - [x] tokens 测试新增 shopify light 断言并全绿
+- 预估：15min | 依赖：P2 | 状态：done
 
 ### Step 3.2 — shopify dark token 集
 - 内容：canvas-night 轨：`bgLayout #000000`、`bgPanel #0a0a0a`、`textBase #ffffff`、`surface-elevated #1e2c31`、阴影 = Level 1 inset 顶边高光（无 drop shadow）；不用 aloe/pistachio（DESIGN.md 禁令：绿色不上暗轨）。
 - 交付物：`themes/shopify.ts` 的 `dark`。
 - 验收：
-  - [ ] 关键值与 DESIGN.md 一致；暗轨无绿色强调
-  - [ ] tokens 测试断言全绿
-- 预估：15min | 依赖：3.1 | 状态：pending
+  - [x] 关键值与 DESIGN.md 一致；暗轨无绿色强调
+  - [x] tokens 测试断言全绿
+- 预估：15min | 依赖：3.1 | 状态：done
 
 ### Step 3.3 — Inter Variable 字体打包
 - 内容：安装 npm 包 `@fontsource-variable/inter`（评审裁定 #3：vite 构建自动打包 woff2，Electron 离线可用；仅引入 latin 所需 CSS 入口以控制体积）；`index.css` 添加 `@font-face`/import；shopify 主题 `font.family` 指向 Inter；shopify 主题下全局 `font-feature-settings: "ss03"`（按 `data-theme` 选择器挂载）。
 - 交付物：`package.json` 依赖、`index.css`、shopify.ts font 域。
 - 验收：
-  - [ ] 断网/打包后字体仍生效（`npm run build` 产物包含 woff2）
-  - [ ] DevTools 确认 shopify 主题正文渲染为 Inter
-- 预估：15min | 依赖：3.1 | 状态：pending
+  - [x] 断网/打包后字体仍生效（`npm run build` 产物包含 woff2）
+  - [x] DevTools 确认 shopify 主题正文渲染为 Inter
+- 预估：15min | 依赖：3.1 | 状态：done
 
 ### Step 3.4 — pill 按钮与组件级覆盖
 - 内容：`buildThemeConfig` 凭 `themeId` 输出 per-theme 组件覆盖（评审裁定 #2）：shopify 主题 `Button.borderRadius = 999`（全按钮 pill）、`Card.borderRadiusLG = 12`、输入框 8px；teal 主题保持现状值。走查 Menu 选中态、Bubble、Sender 在 shopify 双模式下的表现，必要时补 token。
 - 交付物：`themeConfig.ts`、可能的 token 增补。
 - 验收：
-  - [ ] shopify 主题下所有 Button 为胶囊形；teal 主题按钮形状不变
-  - [ ] themeConfig 测试覆盖两主题差异断言
-- 预估：15min | 依赖：3.1、3.2 | 状态：pending
+  - [x] shopify 主题下所有 Button 为胶囊形；teal 主题按钮形状不变
+  - [x] themeConfig 测试覆盖两主题差异断言
+- 预估：15min | 依赖：3.1、3.2 | 状态：done
 
 ### Step 3.5 — 四组合视觉走查
 - 内容：`npm run dev` 下逐一切换 teal light / teal dark / shopify light / shopify dark，走查 sidebar、topbar、会话页、chat 面板、分屏、ResizeHandle；截图存档至 ledger；发现的问题能当场修则修，超出范围按 issue-create 开 issue。
 - 交付物：走查记录（ledger.md）。
 - 验收：
-  - [ ] 四组合均无破版、无不可读文字、无未跟随主题的残留色
-- 预估：15min | 依赖：3.3、3.4 | 状态：pending
+  - [x] 四组合均无破版、无不可读文字、无未跟随主题的残留色
+- 预估：15min | 依赖：3.3、3.4 | 状态：done
 
 ---
 
@@ -155,13 +155,13 @@
 - 内容：更新"设计 Token"一节（新域、ThemeTokens、多主题结构、themeStore 用法、新增主题的方法）；更新 ui/ 相关描述（如需）。
 - 交付物：`AGENTS.md`。
 - 验收：
-  - [ ] AGENTS.md 描述与代码实际结构一致
-- 预估：10min | 依赖：P3 | 状态：pending
+  - [x] AGENTS.md 描述与代码实际结构一致
+- 预估：10min | 依赖：P3 | 状态：done
 
 ### Step 4.2 — 全量验证与归档
 - 内容：`npm run test`、`npm run typecheck`、`npm run build` 全过；ledger.md 补全；本目录移至 `docs/archive/`。
 - 交付物：归档目录。
 - 验收：
-  - [ ] 三条命令全绿
+  - [x] 三条命令全绿
   - [ ] `docs/` 下无本 feature 残留目录
-- 预估：10min | 依赖：4.1 | 状态：pending
+- 预估：10min | 依赖：4.1 | 状态：done
