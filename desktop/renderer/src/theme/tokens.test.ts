@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest'
-import { tokens } from './tokens'
+import { tokens, layout } from './tokens'
 
-describe('tokens', () => {
+describe('tokens (teal light — 过渡导出)', () => {
   it('包含全部五个域', () => {
     expect(tokens).toHaveProperty('color')
     expect(tokens).toHaveProperty('font')
     expect(tokens).toHaveProperty('radius')
     expect(tokens).toHaveProperty('spacing')
-    expect(tokens).toHaveProperty('layout')
+    expect(tokens).toHaveProperty('shadow')
   })
 
   describe('color 域', () => {
@@ -25,12 +25,17 @@ describe('tokens', () => {
       expect(c.shellGradientVia).toBe('#f4f5fa')
       expect(c.shellGradientTo).toBe('#eef7f4')
       expect(c.handleHover).toBe('rgba(46, 211, 176, 0.25)')
-      expect(c.shadowPanel).toBe('rgba(30, 40, 80, 0.06)')
-      expect(c.shadowMenuItem).toBe('rgba(30, 40, 80, 0.08)')
       expect(c.bgBubbleAi).toBe('#e9f7f3')
       expect(c.bgBubbleUser).toBe('#f2f3f7')
       expect(c.borderSubtle).toBe('#eceef4')
       expect(c.bgAvatar).toBe('#e4e7f0')
+      // 新增
+      expect(c.shade30).toBe('#d4d4d8')
+      expect(c.shade40).toBe('#a1a1aa')
+      expect(c.shade50).toBe('#71717a')
+      expect(c.shade60).toBe('#52525b')
+      expect(c.shade70).toBe('#3f3f46')
+      expect(c.accent).toBe('#e4f7f1')
     })
   })
 
@@ -43,6 +48,11 @@ describe('tokens', () => {
       expect(f.sizeSm).toBe(12)
       expect(f.sizeMd).toBe(15)
       expect(f.sizeLg).toBe(16)
+      // 新增
+      expect(f.weightRegular).toBe(400)
+      expect(f.weightMedium).toBe(500)
+      expect(f.weightStrong).toBe(600)
+      expect(f.lineHeightBase).toBe(1.5)
     })
   })
 
@@ -55,6 +65,7 @@ describe('tokens', () => {
       expect(r.avatar).toBe(8)
       expect(r.message).toBe(12)
       expect(r.handle).toBe(5)
+      expect(r.pill).toBe(999)
     })
   })
 
@@ -63,20 +74,35 @@ describe('tokens', () => {
       const s = tokens.spacing
       expect(s.shellGap).toBe(12)
       expect(s.shellPadding).toBe(12)
+      expect(s.xxs).toBe(2)
+      expect(s.xs).toBe(4)
+      expect(s.sm).toBe(8)
+      expect(s.md).toBe(12)
+      expect(s.lg).toBe(16)
+      expect(s.xl).toBe(24)
+      expect(s.xxl).toBe(32)
+      expect(s.huge).toBe(64)
     })
   })
 
-  describe('layout 域', () => {
-    it('包含所有布局尺寸 token', () => {
-      const l = tokens.layout
-      expect(l.topbarHeight).toBe(56)
-      expect(l.sidebarDefault).toBe(232)
-      expect(l.sidebarMin).toBe(180)
-      expect(l.sidebarMax).toBe(480)
-      expect(l.auxiliaryDefault).toBe(400)
-      expect(l.auxiliaryMin).toBe(280)
-      expect(l.auxiliaryMax).toBe(640)
-      expect(l.resizeHandleSize).toBe(10)
+  describe('shadow 域', () => {
+    it('包含完整 box-shadow 字符串（含几何 + 颜色）', () => {
+      const s = tokens.shadow
+      expect(s.panel).toBe('0 4px 24px rgba(30, 40, 80, 0.06)')
+      expect(s.menuItem).toBe('0 2px 10px rgba(30, 40, 80, 0.08)')
     })
+  })
+})
+
+describe('layout（跨主题不变量）', () => {
+  it('包含所有布局尺寸 token', () => {
+    expect(layout.topbarHeight).toBe(56)
+    expect(layout.sidebarDefault).toBe(232)
+    expect(layout.sidebarMin).toBe(180)
+    expect(layout.sidebarMax).toBe(480)
+    expect(layout.auxiliaryDefault).toBe(400)
+    expect(layout.auxiliaryMin).toBe(280)
+    expect(layout.auxiliaryMax).toBe(640)
+    expect(layout.resizeHandleSize).toBe(10)
   })
 })

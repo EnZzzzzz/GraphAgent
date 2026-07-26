@@ -5,7 +5,7 @@ import { ContentSplit } from './ContentSplit'
 import { getContentLayoutService } from '../contentLayoutServiceInstance'
 import type { PageManager } from './pageManager'
 import type { PageResolution } from './registry'
-import { tokens } from '../theme/tokens'
+import { layout } from '../theme/tokens'
 
 interface WorkbenchLayoutProps {
   pageManager: PageManager
@@ -44,8 +44,8 @@ function usePageResolution(pageManager: PageManager): PageResolution | undefined
 
 export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Element {
   const resolution = usePageResolution(pageManager)
-  const [sidebarWidth, setSidebarWidth] = useState<number>(tokens.layout.sidebarDefault)
-  const [auxiliaryWidth, setAuxiliaryWidth] = useState<number>(tokens.layout.auxiliaryDefault)
+  const [sidebarWidth, setSidebarWidth] = useState<number>(layout.sidebarDefault)
+  const [auxiliaryWidth, setAuxiliaryWidth] = useState<number>(layout.auxiliaryDefault)
 
   // Activate page layout on resolution change
   const prevPageIdRef = useRef<string | null>(null)
@@ -75,8 +75,8 @@ export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Elem
         getWidth={() => sidebarWidth}
         setWidth={setSidebarWidth}
         direction={1}
-        min={tokens.layout.sidebarMin}
-        max={tokens.layout.sidebarMax}
+        min={layout.sidebarMin}
+        max={layout.sidebarMax}
       />
 
       <div className="main-column">
@@ -117,8 +117,8 @@ export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Elem
                 getWidth={() => auxiliaryWidth}
                 setWidth={setAuxiliaryWidth}
                 direction={-1}
-                min={tokens.layout.auxiliaryMin}
-                max={tokens.layout.auxiliaryMax}
+                min={layout.auxiliaryMin}
+                max={layout.auxiliaryMax}
               />
               <aside className="panel panel-chat" style={{ width: auxiliaryWidth }}>
                 <resolution.auxiliary.view.component />
