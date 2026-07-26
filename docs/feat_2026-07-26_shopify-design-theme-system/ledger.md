@@ -7,3 +7,10 @@
 - WorkbenchLayout.tsx → import { layout }
 - tokens.test.ts 7/7, themeConfig.test.ts 4/4, typecheck clean
 - cssVariables.test.ts 2 failures deferred to Step 1.2 (expected: layout vars + shadow rename)
+
+## Step 1.2: complete
+- commits: 9624ff8..a823c9e
+- cssVariables.ts: layout constant added, shadow domain string passthrough
+- index.css: shadow vars migrated (--ga-color-shadow-* → --ga-shadow-*)
+- cssVariables.test.ts: updated for shadow/layout/extended fields
+- 116/116 tests passing, typecheck clean

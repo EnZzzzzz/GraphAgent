@@ -32,9 +32,9 @@
 - 内容：`color.shadowPanel`/`shadowMenuItem` 迁入 `shadow` 域（值变为完整 box-shadow 字符串）；`cssVariables.ts` 支持 shadow 域（字符串原样、不加 px）；`index.css` 的 `box-shadow: 0 4px 24px var(--ga-color-shadow-panel)` 等改为 `box-shadow: var(--ga-shadow-panel)`。
 - 交付物：`cssVariables.ts`、`index.css`、teal.ts 的 shadow 域。
 - 验收：
-  - [ ] index.css 中不再引用 `--ga-color-shadow-*`
-  - [ ] 渲染阴影视觉与迁移前一致（走查 sidebar 面板/菜单项）
-- 预估：15min | 依赖：1.1 | 状态：pending
+  - [x] index.css 中不再引用 `--ga-color-shadow-*`
+  - [x] 渲染阴影视觉与迁移前一致（走查 sidebar 面板/菜单项）
+- 预估：15min | 依赖：1.1 | 状态：done
 
 ### Step 1.3 — teal dark token 集
 - 内容：定义 teal dark：`primary`/`link` 保持 `#2ed3b0`/`#12a98c`；背景 `bgLayout`/`bgPanel`/`bgPanelSunken` 深色化（如 `#16181d`/`#1e2128`/`#191b21`，以走查微调）；文字/边框/气泡/头像/渐变三色/阴影按暗色映射。
