@@ -5,7 +5,7 @@
 | Step | Status | Commits | Notes |
 |------|--------|---------|-------|
 | 1.1 | complete | 2e300f3..5dfec5f | review clean |
-| 1.2 | pending | - | - |
+| 1.2 | complete | 559b680..c60f283 | review clean |
 | 1.3 | pending | - | - |
 | 1.4 | pending | - | - |
 | 2.1 | pending | - | - |
