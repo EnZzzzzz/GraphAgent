@@ -83,7 +83,44 @@ getPageManager().switchPage('my-page')
 
 ## 设计 Token
 
-项目使用 `desktop/renderer/src/theme/tokens.ts` 作为设计值的**唯一数据源**，分 `color` / `font` / `radius` / `spacing` / `layout` 五域。Token 同时注入为 CSS 自定义属性（`--ga-*`），供 CSS、组件内联样式与未来插件消费。
+项目使用 `desktop/renderer/src/theme/tokens.ts` 定义 `ThemeTokens` 接口（`color` / `font` / `radius` / `spacing` / `shadow` 五域）与跨主题不变的 `layout` 常量。Token 同时注入为 CSS 自定义属性（`--ga-*`），供 CSS、组件内联样式与未来插件消费。
+
+### 多主题结构
+
+```
+theme/
+├── tokens.ts          # ThemeTokens 类型定义 + layout 常量
+├── themes/
+│   ├── teal.ts        # { light, dark }: ThemeTokens
+│   └── shopify.ts     # { light, dark }: ThemeTokens
+├── themeStore.ts      # 当前主题 state（emitter 模式，同 pageManager）
+├── themeConfig.ts     # buildThemeConfig(tokens, mode, themeId): ThemeConfig
+├── ThemeProvider.tsx   # 订阅 store → ConfigProvider
+└── cssVariables.ts    # applyCssVariables(tokens) + applyCurrentTheme()
+```
+
+两套主题 × 双模式 = 4 个 token 集：`teal { light, dark }` 与 `shopify { light, dark }`。
+`layout` 域跨主题不变，单独导出。
+
+### themeStore 用法
+
+```ts
+import { getThemeStore } from '../theme/themeStore'
+
+const store = getThemeStore()
+store.getTheme()           // { themeId: 'teal', mode: 'light' }
+store.setTheme('shopify', 'dark')
+store.onDidChange((s) => { /* s: ThemeState */ })
+```
+
+localStorage key `ga-theme` 持久化；mode 缺省跟随 `prefers-color-scheme`。
+
+### 新增主题
+
+1. 在 `themes/` 下新建 `<name>.ts`，导出 `{ light: ThemeTokens, dark: ThemeTokens }`
+2. 在 `cssVariables.ts` 的 `resolveTokens()` 增加分支
+3. 更新 `ThemeId` 类型（`themeStore.ts`）
+4. 在 `ThemeSwitcher.tsx` 的 `THEME_CYCLE` 中加入
 
 ### 消费方式
 
@@ -92,8 +129,9 @@ getPageManager().switchPage('my-page')
 .panel { background: var(--ga-color-bg-panel); }
 
 // TypeScript —— 类型安全的直接引用
-import { tokens } from '../theme/tokens'
-const c = tokens.color.primary
+import { layout } from '../theme/tokens'
+import { teal } from '../theme/themes/teal'
+const c = teal.light.color.primary
 
 // 内联样式 —— CSS 变量优先
 <div style={{ color: 'var(--ga-color-text-base)' }} />
@@ -103,7 +141,7 @@ const c = tokens.color.primary
 
 ### Token 命名规范
 
-CSS 变量格式：`--ga-<域>-<kebab名>`。如 `tokens.color.textBase` → `--ga-color-text-base`。
+CSS 变量格式：`--ga-<域>-<kebab名>`。如 `shadow.panel` → `--ga-shadow-panel`；`layout.topbarHeight` → `--ga-layout-topbar-height`。`shadow` 域为完整 box-shadow 字符串，不加 px。
 
 ## Content 分屏
 
