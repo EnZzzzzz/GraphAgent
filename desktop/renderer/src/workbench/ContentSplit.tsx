@@ -3,7 +3,41 @@ import { Registry } from './registry'
 import { ResizeHandle } from './ResizeHandle'
 import type { ContentLayoutService, RuntimeNode, RuntimeLeaf, RuntimeSplit } from './contentLayoutService'
 
-const LEAF_MIN_SIZE = 120
+export const LEAF_MIN_SIZE = 120
+
+/**
+ * 拖拽换算（纯函数，便于单测）：
+ * 1 单位 flex-grow 权重 = totalPx / sum(sizes) 像素，故像素位移换算系数为 sum(sizes) / totalPx。
+ * min 钳制按 LEAF_MIN_SIZE 像素对应的权重执行，一侧亏量对称转移到另一侧（总权重守恒）。
+ */
+export function computeDraggedSizes(
+  sizes: number[],
+  index: number,
+  deltaPx: number,
+  totalPx: number
+): number[] {
+  const totalWeight = sizes.reduce((a, b) => a + b, 0)
+  const weightDelta = (deltaPx * totalWeight) / totalPx
+  const result = [...sizes]
+
+  const minWeight = (LEAF_MIN_SIZE * totalWeight) / totalPx
+  let leftTarget = result[index] + weightDelta
+  let rightTarget = result[index + 1] - weightDelta
+
+  // Symmetric clamp: deficit from one side goes to the other
+  if (leftTarget < minWeight) {
+    rightTarget -= minWeight - leftTarget
+    leftTarget = minWeight
+  }
+  if (rightTarget < minWeight) {
+    leftTarget -= minWeight - rightTarget
+    rightTarget = minWeight
+  }
+
+  result[index] = Math.max(minWeight, leftTarget)
+  result[index + 1] = Math.max(minWeight, rightTarget)
+  return result
+}
 
 interface ContentSplitProps {
   service: ContentLayoutService
@@ -92,30 +126,7 @@ function SplitView({
         const totalPx = isRow ? container.clientWidth : container.clientHeight
         if (totalPx <= 0) return
 
-        const totalWeight = split.sizes.reduce((a, b) => a + b, 0)
-        const weightDelta = (deltaPx * totalWeight) / totalPx
-        const sizes = [...split.sizes]
-        const leftIdx = index
-        const rightIdx = index + 1
-
-        const minWeight = LEAF_MIN_SIZE / totalPx
-        let leftTarget = sizes[leftIdx] + weightDelta
-        let rightTarget = sizes[rightIdx] - weightDelta
-
-        // Symmetric clamp: deficit from one side goes to the other
-        if (leftTarget < minWeight) {
-          rightTarget -= minWeight - leftTarget
-          leftTarget = minWeight
-        }
-        if (rightTarget < minWeight) {
-          leftTarget -= minWeight - rightTarget
-          rightTarget = minWeight
-        }
-
-        sizes[leftIdx] = Math.max(minWeight, leftTarget)
-        sizes[rightIdx] = Math.max(minWeight, rightTarget)
-
-        service.setChildSizes(split.splitId, sizes)
+        service.setChildSizes(split.splitId, computeDraggedSizes(split.sizes, index, deltaPx, totalPx))
       },
     [service, split.splitId, split.sizes, isRow]
   )
