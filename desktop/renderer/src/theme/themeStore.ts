@@ -48,7 +48,9 @@ export class ThemeStore {
   private _emitter = new Emitter<ThemeState>()
 
   getTheme(): ThemeState {
-    return { ...this._state }
+    // 直接返回内部引用：setTheme 总是整体替换新对象，
+    // 引用仅在真正切换时变化，满足 useSyncExternalStore getSnapshot 的稳定性要求。
+    return this._state
   }
 
   setTheme(themeId: ThemeId, mode: ThemeMode): void {

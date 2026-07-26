@@ -30,6 +30,9 @@ describe('applyCssVariables', () => {
     // 抽查 font 域
     expect(style.getPropertyValue('--ga-font-size-base')).toBe('14px')
     expect(style.getPropertyValue('--ga-font-size-lg')).toBe('16px')
+    // weight / lineHeight 是无单位数值，不加 px
+    expect(style.getPropertyValue('--ga-font-weight-regular')).toBe('400')
+    expect(style.getPropertyValue('--ga-font-line-height-base')).toBe('1.5')
 
     // 抽查 radius 域
     expect(style.getPropertyValue('--ga-radius-panel')).toBe('16px')

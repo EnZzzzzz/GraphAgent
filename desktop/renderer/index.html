@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GraphAgent</title>
     <script>
-      // FOUC 防护：React 加载前读 localStorage，预设 data-theme/data-mode + 背景色
+      // FOUC 防护：React 加载前读 localStorage，预设 data-theme/data-mode + 各主题对应的底色
       (function() {
+        var BG = {
+          'teal:light': '#eef0f7',
+          'teal:dark': '#16181d',
+          'shopify:light': '#fbfbf5',
+          'shopify:dark': '#000000'
+        };
         try {
           var raw = localStorage.getItem('ga-theme');
           if (raw) {
             var state = JSON.parse(raw);
             if (state.themeId) document.documentElement.setAttribute('data-theme', state.themeId);
             if (state.mode) document.documentElement.setAttribute('data-mode', state.mode);
-            if (state.mode === 'dark') {
-              document.documentElement.style.backgroundColor = '#16181d';
-            }
+            var bg = BG[state.themeId + ':' + state.mode];
+            if (bg) document.documentElement.style.backgroundColor = bg;
           }
         } catch(e) {}
       })();

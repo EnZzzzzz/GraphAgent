@@ -15,6 +15,9 @@ export function buildThemeConfig(
   themeId: ThemeId
 ): ThemeConfig {
   const isShopify = themeId === 'shopify'
+  // shopify dark 的 colorPrimary 为纯白（canvas-night 轨的反相 pill），
+  // 需把实心按钮文字色反转为黑，否则白底白字不可读
+  const darkSolidText = isShopify && mode === 'dark' ? '#000000' : undefined
 
   const config: ThemeConfig = {
     token: {
@@ -23,6 +26,7 @@ export function buildThemeConfig(
       colorLink: tokens.color.link,
       colorTextBase: tokens.color.textBase,
       colorBgLayout: tokens.color.bgLayout,
+      ...(darkSolidText ? { colorTextLightSolid: darkSolidText } : {}),
       borderRadius: isShopify ? 8 : tokens.radius.control,
       fontSize: tokens.font.sizeBase,
       fontFamily: tokens.font.family

@@ -1,5 +1,4 @@
-/* Inter Variable 字体（shopify 主题） */
-@import '@fontsource-variable/inter';
+/* Inter Variable 字体通过 main.tsx import，不在此 @import */
 
 html,
 body,
@@ -13,11 +12,6 @@ body {
   -webkit-font-smoothing: antialiased;
   user-select: none;
   background: var(--ga-color-bg-layout);
-}
-
-/* FOUC 防护：React 未加载时用 data-mode 硬编码背景 */
-html[data-mode='dark'] body {
-  background: #16181d;
 }
 
 /* Shopify 主题：全局 ss03 stylistic set */

@@ -88,6 +88,3 @@ export const layout = {
   auxiliaryMax: 640,
   resizeHandleSize: 10
 } as const
-
-// ── 过渡兼容导出（P1 期间保留，Step 2.3 移除）────────────────
-// 已移除。所有消费者已迁移至 ThemeTokens 参数化接口。
