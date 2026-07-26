@@ -40,17 +40,17 @@
 - 内容：定义 teal dark：`primary`/`link` 保持 `#2ed3b0`/`#12a98c`；背景 `bgLayout`/`bgPanel`/`bgPanelSunken` 深色化（如 `#16181d`/`#1e2128`/`#191b21`，以走查微调）；文字/边框/气泡/头像/渐变三色/阴影按暗色映射。
 - 交付物：`themes/teal.ts` 的 `dark`。
 - 验收：
-  - [ ] ThemeTokens 全字段有值，无遗漏
-  - [ ] 文字与背景对比度目测可读（走查记录于 ledger）
-- 预估：15min | 依赖：1.1 | 状态：pending
+  - [x] ThemeTokens 全字段有值，无遗漏
+  - [x] 文字与背景对比度目测可读（走查记录于 ledger）
+- 预估：15min | 依赖：1.1 | 状态：done
 
 ### Step 1.4 — 三个 theme 测试参数化重构
 - 内容：`tokens.test.ts` → teal light 保留原字面量断言 + teal dark 结构完整性断言；`themeConfig.test.ts` → 改为断言 `buildThemeConfig(themes.teal.light, 'light')` 派生值；`cssVariables.test.ts` → 断言对任意 token 集的变量名格式、域覆盖、shadow 不加 px。
 - 交付物：三个测试文件。
 - 验收：
-  - [ ] `npm run test` 全绿
-  - [ ] teal light 的原字面量断言全部保留（防回归）
-- 预估：15min | 依赖：1.2、1.3 | 状态：pending
+  - [x] `npm run test` 全绿
+  - [x] teal light 的原字面量断言全部保留（防回归）
+- 预估：15min | 依赖：1.2、1.3 | 状态：done
 
 ---
 
