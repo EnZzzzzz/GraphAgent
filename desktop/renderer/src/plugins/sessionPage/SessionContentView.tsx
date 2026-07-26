@@ -1,10 +1,9 @@
 import { Card, Empty, Typography } from 'antd'
+import { getActiveSessionId } from '../sessions/sessionStore'
 
-interface ContentAreaProps {
-  sessionId: string
-}
+export function SessionContentView(): JSX.Element {
+  const sessionId = getActiveSessionId()
 
-export default function ContentArea({ sessionId }: ContentAreaProps): JSX.Element {
   return (
     <div style={{ padding: 28 }}>
       <Typography.Title level={3} style={{ marginTop: 0, color: '#1b1f27' }}>

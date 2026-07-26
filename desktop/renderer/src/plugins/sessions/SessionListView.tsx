@@ -1,13 +1,12 @@
 import { Avatar, Button, Menu, Typography } from 'antd'
-import { MessageOutlined, PlusOutlined, RobotFilled } from '@ant-design/icons'
-import { MOCK_SESSIONS } from '../mock'
+import { MessageOutlined, PlusOutlined, RobotFilled, SwapOutlined } from '@ant-design/icons'
+import { MOCK_SESSIONS } from '../../mock'
+import { useActiveSessionId } from './sessionStore'
+import { getPageManager } from '../../pageManagerInstance'
 
-interface SidebarProps {
-  activeSessionId: string
-  onSelectSession: (id: string) => void
-}
+export function SessionListView(): JSX.Element {
+  const [activeSessionId, setActiveSessionId] = useActiveSessionId()
 
-export default function Sidebar({ activeSessionId, onSelectSession }: SidebarProps): JSX.Element {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div
@@ -15,7 +14,6 @@ export default function Sidebar({ activeSessionId, onSelectSession }: SidebarPro
           display: 'flex',
           alignItems: 'center',
           gap: 8,
-          /* 顶部留白避让 macOS 内嵌红绿灯按钮 */
           padding: '32px 16px 12px',
           // @ts-expect-error WebKit 私有属性：无边框窗口拖拽区
           WebkitAppRegion: 'drag'
@@ -52,8 +50,29 @@ export default function Sidebar({ activeSessionId, onSelectSession }: SidebarPro
           icon: <MessageOutlined />,
           label: s.title
         }))}
-        onClick={({ key }) => onSelectSession(key)}
+        onClick={({ key }) => setActiveSessionId(key)}
       />
+
+      <div
+        style={{
+          padding: '8px 16px',
+          borderTop: '1px solid #eceef4'
+        }}
+      >
+        <Menu
+          mode="inline"
+          selectable={false}
+          style={{ border: 'none', background: 'transparent' }}
+          items={[
+            {
+              key: 'switch-agents',
+              icon: <SwapOutlined />,
+              label: '切换到 Agents 页',
+              onClick: () => getPageManager().switchPage('agents')
+            }
+          ]}
+        />
+      </div>
 
       <div
         style={{

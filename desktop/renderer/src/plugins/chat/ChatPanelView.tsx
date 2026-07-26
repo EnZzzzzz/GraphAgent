@@ -2,15 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Bubble, Sender } from '@ant-design/x'
 import { RobotOutlined, UserOutlined } from '@ant-design/icons'
 import type { GetProp } from 'antd'
+import { useActiveSessionId } from '../sessions/sessionStore'
 
 type BubbleDataType = GetProp<typeof Bubble.List, 'items'>[number]
 
 interface ChatMessage extends BubbleDataType {
   key: string
-}
-
-interface ChatPanelProps {
-  sessionId: string
 }
 
 function mockReply(input: string): string {
@@ -22,7 +19,8 @@ function mockReply(input: string): string {
   )
 }
 
-export default function ChatPanel({ sessionId }: ChatPanelProps): JSX.Element {
+export function ChatPanelView(): JSX.Element {
+  const [sessionId] = useActiveSessionId()
   const [messages, setMessages] = useState<Record<string, ChatMessage[]>>({})
   const [loading, setLoading] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
@@ -50,7 +48,6 @@ export default function ChatPanel({ sessionId }: ChatPanelProps): JSX.Element {
       ]
     }))
 
-    // Mock 流式输出：接入真实 Agent 时替换为 SSE/WebSocket 增量回调
     const reply = mockReply(text)
     let offset = 0
     const timer = setInterval(() => {
