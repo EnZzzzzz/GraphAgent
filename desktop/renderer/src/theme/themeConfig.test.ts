@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { buildThemeConfig } from './themeConfig'
 import { teal } from './themes/teal'
+import { shopify } from './themes/shopify'
 
 describe('buildThemeConfig', () => {
   const tealLight = teal.light
@@ -59,5 +60,32 @@ describe('buildThemeConfig', () => {
   it('light 模式不叠加 darkAlgorithm', () => {
     const cfg = buildThemeConfig(tealLight, 'light', 'teal')
     expect(cfg.algorithm).toBeUndefined()
+  })
+
+  describe('per-theme 组件覆盖', () => {
+    it('shopify 主题按钮为 pill (borderRadius = 999)', () => {
+      const cfg = buildThemeConfig(shopify.light, 'light', 'shopify')
+      expect(cfg.components?.Button?.borderRadius).toBe(999)
+    })
+
+    it('teal 主题按钮保持现有 borderRadius = 10', () => {
+      const cfg = buildThemeConfig(tealLight, 'light', 'teal')
+      expect(cfg.components?.Button?.borderRadius).toBe(10)
+    })
+
+    it('shopify 主题 Card borderRadiusLG = 12', () => {
+      const cfg = buildThemeConfig(shopify.light, 'light', 'shopify')
+      expect(cfg.components?.Card?.borderRadiusLG).toBe(12)
+    })
+
+    it('teal 主题 Card borderRadiusLG = 16', () => {
+      const cfg = buildThemeConfig(tealLight, 'light', 'teal')
+      expect(cfg.components?.Card?.borderRadiusLG).toBe(16)
+    })
+
+    it('shopify 全局 borderRadius = 8', () => {
+      const cfg = buildThemeConfig(shopify.light, 'light', 'shopify')
+      expect(cfg.token?.borderRadius).toBe(8)
+    })
   })
 })

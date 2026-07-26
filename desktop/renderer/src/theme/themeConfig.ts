@@ -12,8 +12,10 @@ import type { ThemeId, ThemeMode } from './themeStore'
 export function buildThemeConfig(
   tokens: ThemeTokens,
   mode: ThemeMode,
-  _themeId: ThemeId
+  themeId: ThemeId
 ): ThemeConfig {
+  const isShopify = themeId === 'shopify'
+
   const config: ThemeConfig = {
     token: {
       colorPrimary: tokens.color.primary,
@@ -21,7 +23,7 @@ export function buildThemeConfig(
       colorLink: tokens.color.link,
       colorTextBase: tokens.color.textBase,
       colorBgLayout: tokens.color.bgLayout,
-      borderRadius: tokens.radius.control,
+      borderRadius: isShopify ? 8 : tokens.radius.control,
       fontSize: tokens.font.sizeBase,
       fontFamily: tokens.font.family
     },
@@ -35,11 +37,11 @@ export function buildThemeConfig(
         itemHeight: 40
       },
       Button: {
-        borderRadius: tokens.radius.control,
+        borderRadius: isShopify ? tokens.radius.pill : tokens.radius.control,
         controlHeight: 36
       },
       Card: {
-        borderRadiusLG: tokens.radius.panel
+        borderRadiusLG: isShopify ? tokens.radius.card : tokens.radius.panel
       }
     }
   }

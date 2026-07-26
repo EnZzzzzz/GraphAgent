@@ -17,6 +17,14 @@ html[data-mode='dark'] body {
   background: #16181d;
 }
 
+/* Inter Variable 字体（shopify 主题） */
+@import '@fontsource-variable/inter';
+
+/* Shopify 主题：全局 ss03 stylistic set */
+html[data-theme='shopify'] body {
+  font-feature-settings: 'ss03';
+}
+
 /* 参考 HiAgents：淡紫灰渐变底 + 悬浮白色圆角面板，栏间留缝、无硬边框 */
 .app-shell {
   display: flex;
