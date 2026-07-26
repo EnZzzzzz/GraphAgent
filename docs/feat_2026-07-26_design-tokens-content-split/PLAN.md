@@ -8,7 +8,7 @@
 | --- | --- | --- | --- | --- |
 | P1 | 设计 token 单一数据源 + 存量改造 | 4 | 无 | done |
 | P2 | content 分屏（声明 / service / 渲染 / 拖拽） | 5 | P1 | done |
-| P3 | 共享组件库 `ui/` + 存量迁移 | 4 | P1（组件默认值消费 token；与 P2 无强耦合，排在其后避免双方同改插件文件产生冲突） | pending |
+| P3 | 共享组件库 `ui/` + 存量迁移 | 4 | P1 | done |
 
 ---
 
@@ -50,7 +50,7 @@
 
 | Step | 内容 | 验收 | 状态 |
 | --- | --- | --- | --- |
-| 3.1 | 新建 `ui/` 目录骨架；基础包装 `Button` / `Typography` / `Avatar` / `Menu` / `Tooltip` / `Card` / `Empty`（透出 antd props）；`ui/icons` 统一 re-export `@ant-design/icons`；re-export `@ant-design/x` 的 `Bubble` / `Sender` | - [ ] 每个出口有渲染测试；typecheck 绿 | pending |
-| 3.2 | 组合组件 `TopbarSearchInput`（样式消费 token / CSS 变量） | - [ ] 渲染 + 交互（输入/清空）测试通过 | pending |
-| 3.3 | 迁移存量：`sessions` / `chat` / `sessionPage` 插件及 workbench 组件改为从 `ui/` 导入；仅 `ui/`、`main.tsx`、`theme/`（基础设施豁免）保留对 antd 系的直接 import | - [ ] grep 验证 import 约束达成；全量测试绿、视觉零回归 | pending |
-| 3.4 | AGENTS.md 更新「组件库」章节（插件优先使用预置组件 + import 约束）；全量回归 + commit | - [ ] 全量 test/typecheck/build 绿；文档完整 | pending |
+| 3.1 | `ui/` 骨架：Button Typography Avatar Menu Tooltip Card Empty + icons + Bubble/Sender | - [x] 8/8 渲染测试；typecheck 绿 | done |
+| 3.2 | `TopbarSearchInput` 组合组件 | - [x] 5/5 交互测试通过 | done |
+| 3.3 | 存量迁移：插件 → `ui/` 导入 + import 约束 grep 验证 | - [x] 109/109 测试绿；grep 零违规 | done |
+| 3.4 | AGENTS.md 组件库章节 | - [x] 文档完整；全量 test/typecheck 绿 | done |

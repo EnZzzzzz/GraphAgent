@@ -13,7 +13,7 @@
 | 2.3 | complete | cc0839f..5155896 | review clean |
 | 2.4 | complete | 31209ae..48eb747 | review clean |
 | 2.5 | complete | aa137bc..f8b90e0 | review clean |
-| 3.1 | pending | - | - |
-| 3.2 | pending | - | - |
-| 3.3 | pending | - | - |
-| 3.4 | pending | - | - |
+| 3.1 | complete | 9777e6d..5df3d41 | review clean (vitest barrel workaround noted) |
+| 3.2 | complete | (included in 3.1-3.4) | - |
+| 3.3 | complete | (included in 3.1-3.4) | - |
+| 3.4 | complete | (included in 3.1-3.4) | - |
