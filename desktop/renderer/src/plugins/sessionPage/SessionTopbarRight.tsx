@@ -5,7 +5,7 @@ export function SessionTopbarRight(): JSX.Element {
   return (
     <>
       <Typography.Text type="secondary" style={{ fontSize: 12 }}>
-        <CheckCircleFilled style={{ color: '#2ed3b0', marginRight: 4 }} />
+        <CheckCircleFilled style={{ color: 'var(--ga-color-primary)', marginRight: 4 }} />
         已自动保存
       </Typography.Text>
       <Tooltip title="测试运行">

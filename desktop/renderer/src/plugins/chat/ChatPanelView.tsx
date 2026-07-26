@@ -76,11 +76,11 @@ export function ChatPanelView(): JSX.Element {
           gap: 8,
           padding: '20px 16px 12px',
           fontWeight: 600,
-          color: '#1b1f27'
+          color: 'var(--ga-color-text-base)'
         }}
       >
         <span
-          style={{ width: 8, height: 8, borderRadius: '50%', background: '#2ed3b0' }}
+          style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--ga-color-primary)' }}
         />
         对话 · 流式输出
       </div>
@@ -91,19 +91,19 @@ export function ChatPanelView(): JSX.Element {
           roles={{
             ai: {
               placement: 'start',
-              avatar: { icon: <RobotOutlined />, style: { background: '#2ed3b0' } },
+              avatar: { icon: <RobotOutlined />, style: { background: 'var(--ga-color-primary)' } },
               typing: { step: 2, interval: 30 },
               style: { maxWidth: '92%' },
               styles: {
-                content: { background: '#e9f7f3', borderRadius: 12, color: '#1b1f27' }
+                content: { background: 'var(--ga-color-bg-bubble-ai)', borderRadius: 12, color: 'var(--ga-color-text-base)' }
               }
             },
             user: {
               placement: 'end',
-              avatar: { icon: <UserOutlined />, style: { background: '#1b1f27' } },
+              avatar: { icon: <UserOutlined />, style: { background: 'var(--ga-color-text-base)' } },
               style: { maxWidth: '92%' },
               styles: {
-                content: { background: '#f2f3f7', borderRadius: 12, color: '#1b1f27' }
+                content: { background: 'var(--ga-color-bg-bubble-user)', borderRadius: 12, color: 'var(--ga-color-text-base)' }
               }
             }
           }}

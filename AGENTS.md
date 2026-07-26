@@ -80,3 +80,27 @@ getPageManager().switchPage('my-page')
 - 类型检查：`npm run typecheck`
 - 构建：`npm run build`
 - 开发：`npm run dev`
+
+## 设计 Token
+
+项目使用 `desktop/renderer/src/theme/tokens.ts` 作为设计值的**唯一数据源**，分 `color` / `font` / `radius` / `spacing` / `layout` 五域。Token 同时注入为 CSS 自定义属性（`--ga-*`），供 CSS、组件内联样式与未来插件消费。
+
+### 消费方式
+
+```ts
+// CSS（推荐）—— 插件可跨技术栈消费
+.panel { background: var(--ga-color-bg-panel); }
+
+// TypeScript —— 类型安全的直接引用
+import { tokens } from '../theme/tokens'
+const c = tokens.color.primary
+
+// 内联样式 —— CSS 变量优先
+<div style={{ color: 'var(--ga-color-text-base)' }} />
+```
+
+**原则**：CSS 变量优先。TS import 用于需要编程计算值（如 ResizeHandle 的 clamp 范围）或 token 引用不可省略的场景（如 themeConfig 派生）。
+
+### Token 命名规范
+
+CSS 变量格式：`--ga-<域>-<kebab名>`。如 `tokens.color.textBase` → `--ga-color-text-base`。
