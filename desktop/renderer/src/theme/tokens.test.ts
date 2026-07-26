@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { layout } from './tokens'
 import { teal } from './themes/teal'
+import { shopify } from './themes/shopify'
 
 const tokens = teal.light
 
@@ -142,5 +143,41 @@ describe('teal dark', () => {
     // 文字与背景对比度常识（浅色字 + 深色底）
     // textBase 不应等于 bgLayout（否则不可读）
     expect(t.color.textBase).not.toBe(t.color.bgLayout)
+  })
+})
+
+describe('shopify light', () => {
+  const s = shopify.light
+
+  it('关键颜色值与 DESIGN.md 一致', () => {
+    expect(s.color.primary).toBe('#000000')
+    expect(s.color.textBase).toBe('#000000')
+    expect(s.color.bgPanel).toBe('#ffffff')
+    expect(s.color.bgLayout).toBe('#fbfbf5')
+    expect(s.color.borderSubtle).toBe('#e4e4e7')
+    expect(s.color.accent).toBe('#c1fbd4')
+  })
+
+  it('shade 灰阶与 DESIGN.md 一致', () => {
+    expect(s.color.shade30).toBe('#d4d4d8')
+    expect(s.color.shade40).toBe('#a1a1aa')
+    expect(s.color.shade50).toBe('#71717a')
+    expect(s.color.shade60).toBe('#52525b')
+    expect(s.color.shade70).toBe('#3f3f46')
+  })
+
+  it('radius.pill = 999', () => {
+    expect(s.radius.pill).toBe(999)
+  })
+
+  it('font weight 使用 Inter 420/500/550', () => {
+    expect(s.font.weightRegular).toBe(420)
+    expect(s.font.weightMedium).toBe(500)
+    expect(s.font.weightStrong).toBe(550)
+  })
+
+  it('shadow panel 为 Level 3 多层小阴影堆叠', () => {
+    expect(s.shadow.panel).toContain('rgba(0,0,0,0.1)')
+    expect(s.shadow.panel.split(',').length).toBeGreaterThanOrEqual(4)
   })
 })
