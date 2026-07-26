@@ -104,3 +104,64 @@ const c = tokens.color.primary
 ### Token 命名规范
 
 CSS 变量格式：`--ga-<域>-<kebab名>`。如 `tokens.color.textBase` → `--ga-color-text-base`。
+
+## Content 分屏
+
+Content 区域支持声明式嵌套分屏布局，由 `ContentNode` 类型描述：
+
+```ts
+type ContentNode = ContentLeaf | ContentSplit
+
+interface ContentLeaf { viewId: string }
+interface ContentSplit {
+  direction: 'row' | 'column'  // row=左右分屏，column=上下分屏
+  children: ContentNode[]
+  sizes?: number[]              // flex-grow 权重，缺省全 1
+}
+```
+
+### 声明分屏
+
+在 Page 声明中使用嵌套 `ContentNode`：
+
+```ts
+ctx.registerContribution({
+  point: 'workbench.pages',
+  page: {
+    id: 'my-page',
+    title: 'My Page',
+    layout: {
+      content: {
+        direction: 'row',
+        children: [
+          { viewId: 'left-panel' },
+          { viewId: 'right-panel' }
+        ],
+        sizes: [1, 2]
+      }
+    }
+  }
+})
+```
+
+旧 `{ viewId }` 写法仍兼容（等价于单叶子 `ContentLeaf`）。
+
+### 运行时分屏
+
+通过 `getContentLayoutService()` 单例在运行时拆分/关闭 pane：
+
+```ts
+import { getContentLayoutService } from '../contentLayoutServiceInstance'
+
+const svc = getContentLayoutService()
+// 拆分 leaf 为左右分屏
+svc.splitLeaf(leafId, 'row', 'new-view-id')
+// 关闭 leaf（最后一个 leaf 不可关闭）
+svc.closeLeaf(leafId)
+// 调整分屏权重
+svc.setChildSizes(splitId, [1, 2, 1])
+// 订阅布局变更
+svc.onDidChange(() => { /* re-render */ })
+```
+
+分屏 divider 可拖拽调节比例，每个 leaf 有 120px 最小尺寸约束。
