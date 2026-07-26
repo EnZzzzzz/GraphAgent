@@ -52,4 +52,28 @@ describe('ResizeHandle', () => {
     expect(setWidth).not.toHaveBeenCalled()
     expect(document.body.style.cursor).toBe('')
   })
+
+  describe('orientation=vertical', () => {
+    it('向下拖拽按 direction=1 调大高度（clientY）', () => {
+      const { handle, setWidth } = setup({ orientation: 'vertical' })
+      fireEvent.mouseDown(handle, { clientY: 300 })
+      fireEvent.mouseMove(document, { clientY: 350 })
+      expect(setWidth).toHaveBeenLastCalledWith(282) // 232 + (350-300)
+    })
+
+    it('vertical 模式使用 row-resize cursor', () => {
+      const { handle } = setup({ orientation: 'vertical' })
+      fireEvent.mouseDown(handle, { clientY: 300 })
+      expect(document.body.style.cursor).toBe('row-resize')
+      fireEvent.mouseUp(document)
+    })
+
+    it('vertical 模式不影响 horizontal 默认行为', () => {
+      // 不传 orientation 时仍为 horizontal
+      const { handle } = setup()
+      fireEvent.mouseDown(handle, { clientX: 300 })
+      expect(document.body.style.cursor).toBe('col-resize')
+      fireEvent.mouseUp(document)
+    })
+  })
 })
