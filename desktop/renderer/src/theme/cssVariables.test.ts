@@ -3,7 +3,6 @@ import { applyCssVariables } from './cssVariables'
 
 describe('applyCssVariables', () => {
   beforeEach(() => {
-    // 清理上一轮测试写入的 CSS 变量
     const root = document.documentElement
     for (let i = root.style.length - 1; i >= 0; i--) {
       const prop = root.style[i]
@@ -39,13 +38,17 @@ describe('applyCssVariables', () => {
     // 抽查 layout 域
     expect(style.getPropertyValue('--ga-layout-topbar-height')).toBe('56px')
     expect(style.getPropertyValue('--ga-layout-sidebar-default')).toBe('232px')
+
+    // shadow 域 — 字符串原样输出（不加 px）
+    expect(style.getPropertyValue('--ga-shadow-panel')).toBe('0 4px 24px rgba(30, 40, 80, 0.06)')
+    expect(style.getPropertyValue('--ga-shadow-menu-item')).toBe('0 2px 10px rgba(30, 40, 80, 0.08)')
   })
 
   it('每个域都有对应 CSS 变量（全覆盖）', () => {
     applyCssVariables()
     const style = document.documentElement.style
 
-    // color 域 — 逐个验证
+    // color 域
     const colorVars = [
       '--ga-color-primary',
       '--ga-color-link',
@@ -59,12 +62,16 @@ describe('applyCssVariables', () => {
       '--ga-color-shell-gradient-via',
       '--ga-color-shell-gradient-to',
       '--ga-color-handle-hover',
-      '--ga-color-shadow-panel',
-      '--ga-color-shadow-menu-item',
       '--ga-color-bg-bubble-ai',
       '--ga-color-bg-bubble-user',
       '--ga-color-border-subtle',
-      '--ga-color-bg-avatar'
+      '--ga-color-bg-avatar',
+      '--ga-color-shade30',
+      '--ga-color-shade40',
+      '--ga-color-shade50',
+      '--ga-color-shade60',
+      '--ga-color-shade70',
+      '--ga-color-accent'
     ]
     for (const v of colorVars) {
       expect(style.getPropertyValue(v), `${v} 应该有值`).toBeTruthy()
@@ -77,7 +84,11 @@ describe('applyCssVariables', () => {
       '--ga-font-size-small',
       '--ga-font-size-sm',
       '--ga-font-size-md',
-      '--ga-font-size-lg'
+      '--ga-font-size-lg',
+      '--ga-font-weight-regular',
+      '--ga-font-weight-medium',
+      '--ga-font-weight-strong',
+      '--ga-font-line-height-base'
     ]
     for (const v of fontVars) {
       expect(style.getPropertyValue(v), `${v} 应该有值`).toBeTruthy()
@@ -90,7 +101,8 @@ describe('applyCssVariables', () => {
       '--ga-radius-card',
       '--ga-radius-avatar',
       '--ga-radius-message',
-      '--ga-radius-handle'
+      '--ga-radius-handle',
+      '--ga-radius-pill'
     ]
     for (const v of radiusVars) {
       expect(style.getPropertyValue(v), `${v} 应该有值`).toBeTruthy()
@@ -99,9 +111,26 @@ describe('applyCssVariables', () => {
     // spacing 域
     const spacingVars = [
       '--ga-spacing-shell-gap',
-      '--ga-spacing-shell-padding'
+      '--ga-spacing-shell-padding',
+      '--ga-spacing-xxs',
+      '--ga-spacing-xs',
+      '--ga-spacing-sm',
+      '--ga-spacing-md',
+      '--ga-spacing-lg',
+      '--ga-spacing-xl',
+      '--ga-spacing-xxl',
+      '--ga-spacing-huge'
     ]
     for (const v of spacingVars) {
+      expect(style.getPropertyValue(v), `${v} 应该有值`).toBeTruthy()
+    }
+
+    // shadow 域
+    const shadowVars = [
+      '--ga-shadow-panel',
+      '--ga-shadow-menu-item'
+    ]
+    for (const v of shadowVars) {
       expect(style.getPropertyValue(v), `${v} 应该有值`).toBeTruthy()
     }
 
@@ -119,5 +148,13 @@ describe('applyCssVariables', () => {
     for (const v of layoutVars) {
       expect(style.getPropertyValue(v), `${v} 应该有值`).toBeTruthy()
     }
+  })
+
+  it('shadow 域不加 px（字符串原样输出）', () => {
+    applyCssVariables()
+    const style = document.documentElement.style
+
+    expect(style.getPropertyValue('--ga-shadow-panel')).toBe('0 4px 24px rgba(30, 40, 80, 0.06)')
+    expect(style.getPropertyValue('--ga-shadow-menu-item')).toBe('0 2px 10px rgba(30, 40, 80, 0.08)')
   })
 })
