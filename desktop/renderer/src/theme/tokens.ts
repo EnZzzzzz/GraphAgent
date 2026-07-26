@@ -90,6 +90,4 @@ export const layout = {
 } as const
 
 // ── 过渡兼容导出（P1 期间保留，Step 2.3 移除）────────────────
-
-import { teal } from './themes/teal'
-export const tokens = teal.light
+// 已移除。所有消费者已迁移至 ThemeTokens 参数化接口。

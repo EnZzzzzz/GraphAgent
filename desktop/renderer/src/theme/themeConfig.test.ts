@@ -1,9 +1,13 @@
 import { describe, it, expect } from 'vitest'
-import { themeConfig } from './themeConfig'
+import { buildThemeConfig } from './themeConfig'
+import { teal } from './themes/teal'
 
-describe('themeConfig', () => {
+describe('buildThemeConfig', () => {
+  const tealLight = teal.light
+
   it('token 层派生值与旧 theme.ts 逐字段等价', () => {
-    const t = themeConfig.token!
+    const cfg = buildThemeConfig(tealLight, 'light', 'teal')
+    const t = cfg.token!
 
     expect(t.colorPrimary).toBe('#2ed3b0')
     expect(t.colorInfo).toBe('#2ed3b0')
@@ -18,7 +22,8 @@ describe('themeConfig', () => {
   })
 
   it('components.Menu 派生值等价', () => {
-    const m = themeConfig.components?.Menu
+    const cfg = buildThemeConfig(tealLight, 'light', 'teal')
+    const m = cfg.components?.Menu
 
     expect(m).toBeDefined()
     expect(m!.itemSelectedBg).toBe('#ffffff')
@@ -30,7 +35,8 @@ describe('themeConfig', () => {
   })
 
   it('components.Button 派生值等价', () => {
-    const b = themeConfig.components?.Button
+    const cfg = buildThemeConfig(tealLight, 'light', 'teal')
+    const b = cfg.components?.Button
 
     expect(b).toBeDefined()
     expect(b!.borderRadius).toBe(10)
@@ -38,9 +44,20 @@ describe('themeConfig', () => {
   })
 
   it('components.Card 派生值等价', () => {
-    const c = themeConfig.components?.Card
+    const cfg = buildThemeConfig(tealLight, 'light', 'teal')
+    const c = cfg.components?.Card
 
     expect(c).toBeDefined()
     expect(c!.borderRadiusLG).toBe(16)
+  })
+
+  it('dark 模式叠加 darkAlgorithm', () => {
+    const cfg = buildThemeConfig(teal.dark, 'dark', 'teal')
+    expect(cfg.algorithm).toBeDefined()
+  })
+
+  it('light 模式不叠加 darkAlgorithm', () => {
+    const cfg = buildThemeConfig(tealLight, 'light', 'teal')
+    expect(cfg.algorithm).toBeUndefined()
   })
 })

@@ -1,18 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { ConfigProvider } from 'antd'
-import zhCN from 'antd/locale/zh_CN'
 import App from './App'
-import { themeConfig } from './theme/themeConfig'
+import { ThemeProvider } from './theme/ThemeProvider'
 import { applyCurrentTheme } from './theme/cssVariables'
 import './index.css'
 
+// 同步设置初始 CSS 变量（React 渲染前，防 FOUC）
 applyCurrentTheme()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ConfigProvider locale={zhCN} theme={themeConfig}>
+    <ThemeProvider>
       <App />
-    </ConfigProvider>
+    </ThemeProvider>
   </React.StrictMode>
 )

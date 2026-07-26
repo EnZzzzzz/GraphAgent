@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { tokens, layout } from './tokens'
+import { layout } from './tokens'
 import { teal } from './themes/teal'
+
+const tokens = teal.light
 
 describe('tokens (teal light — 过渡导出)', () => {
   it('包含全部五个域', () => {
