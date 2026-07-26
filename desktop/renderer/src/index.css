@@ -127,3 +127,17 @@ body {
   width: 400px;
   flex: none;
 }
+
+/* Part 拖拽调宽手柄：10px 透明热区，负 margin 抵消两侧 12px flex gap（12+10-22+12=12），视觉间距不变 */
+.part-resize-handle {
+  flex: none;
+  width: 10px;
+  margin: 0 -11px;
+  cursor: col-resize;
+  z-index: 10;
+  border-radius: 5px;
+}
+
+.part-resize-handle:hover {
+  background: rgba(46, 211, 176, 0.25);
+}

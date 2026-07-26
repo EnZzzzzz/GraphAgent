@@ -1,8 +1,7 @@
 import { Avatar, Button, Menu, Typography } from 'antd'
-import { MessageOutlined, PlusOutlined, RobotFilled, SwapOutlined } from '@ant-design/icons'
+import { MessageOutlined, PlusOutlined, RobotFilled } from '@ant-design/icons'
 import { MOCK_SESSIONS } from '../../mock'
 import { useActiveSessionId } from './sessionStore'
-import { getPageManager } from '../../pageManagerInstance'
 
 export function SessionListView(): JSX.Element {
   const [activeSessionId, setActiveSessionId] = useActiveSessionId()
@@ -52,27 +51,6 @@ export function SessionListView(): JSX.Element {
         }))}
         onClick={({ key }) => setActiveSessionId(key)}
       />
-
-      <div
-        style={{
-          padding: '8px 16px',
-          borderTop: '1px solid #eceef4'
-        }}
-      >
-        <Menu
-          mode="inline"
-          selectable={false}
-          style={{ border: 'none', background: 'transparent' }}
-          items={[
-            {
-              key: 'switch-agents',
-              icon: <SwapOutlined />,
-              label: '切换到 Agents 页',
-              onClick: () => getPageManager().switchPage('agents')
-            }
-          ]}
-        />
-      </div>
 
       <div
         style={{

@@ -17,12 +17,12 @@ desktop/renderer/src/
 │   ├── pageManager.ts      # activePage 状态管理 + 切换
 │   ├── pluginHost.ts       # activateBuiltin() + Disposable 聚合
 │   ├── WorkbenchLayout.tsx # 布局壳：sidebar / topbar(left/center/right) / content / auxiliary
+│   ├── ResizeHandle.tsx    # Part 边缘拖拽调宽手柄（sidebar / auxiliary，content flex 随动）
 │   └── useContribution.ts  # useSyncExternalStore 封装
 ├── plugins/                # 内置插件（业务）
 │   ├── sessions/           # sidebar 会话列表
 │   ├── sessionPage/        # 会话页：topbar + content
 │   ├── chat/               # 右侧对话面板（auxiliary）
-│   ├── agents/             # 示例第二页面：验证多页面架构
 │   └── index.ts            # BUILTIN_PLUGINS
 ├── App.tsx                 # 入口：PluginHost.activateBuiltin() + <WorkbenchLayout/>
 ├── pageManagerInstance.ts  # 全局 PageManager 单例

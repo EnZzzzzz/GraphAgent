@@ -1,7 +1,14 @@
-import { useMemo, useSyncExternalStore } from 'react'
+import { useMemo, useState, useSyncExternalStore } from 'react'
 import { Registry } from './registry'
+import { ResizeHandle } from './ResizeHandle'
 import type { PageManager } from './pageManager'
 import type { PageResolution } from './registry'
+
+/** sidebar / auxiliary 的默认宽度与拖拽范围（px）。content 为 flex:1 随动，无需配置 */
+export const PART_WIDTH_LIMITS = {
+  sidebar: { default: 232, min: 180, max: 480 },
+  auxiliary: { default: 400, min: 280, max: 640 }
+} as const
 
 interface WorkbenchLayoutProps {
   pageManager: PageManager
@@ -40,11 +47,13 @@ function usePageResolution(pageManager: PageManager): PageResolution | undefined
 
 export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Element {
   const resolution = usePageResolution(pageManager)
+  const [sidebarWidth, setSidebarWidth] = useState<number>(PART_WIDTH_LIMITS.sidebar.default)
+  const [auxiliaryWidth, setAuxiliaryWidth] = useState<number>(PART_WIDTH_LIMITS.auxiliary.default)
 
   return (
     <div className="app-shell">
       {/* Sidebar */}
-      <aside className="panel panel-sidebar">
+      <aside className="panel panel-sidebar" style={{ width: sidebarWidth }}>
         {resolution?.sidebar && (
           <>
             <div>{resolution.sidebar.container.title}</div>
@@ -54,6 +63,13 @@ export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Elem
           </>
         )}
       </aside>
+      <ResizeHandle
+        getWidth={() => sidebarWidth}
+        setWidth={setSidebarWidth}
+        direction={1}
+        min={PART_WIDTH_LIMITS.sidebar.min}
+        max={PART_WIDTH_LIMITS.sidebar.max}
+      />
 
       <div className="main-column">
         {/* Topbar */}
@@ -83,9 +99,18 @@ export function WorkbenchLayout({ pageManager }: WorkbenchLayoutProps): JSX.Elem
 
           {/* Auxiliary */}
           {resolution?.auxiliary && (
-            <aside className="panel panel-chat">
-              <resolution.auxiliary.view.component />
-            </aside>
+            <>
+              <ResizeHandle
+                getWidth={() => auxiliaryWidth}
+                setWidth={setAuxiliaryWidth}
+                direction={-1}
+                min={PART_WIDTH_LIMITS.auxiliary.min}
+                max={PART_WIDTH_LIMITS.auxiliary.max}
+              />
+              <aside className="panel panel-chat" style={{ width: auxiliaryWidth }}>
+                <resolution.auxiliary.view.component />
+              </aside>
+            </>
           )}
         </div>
       </div>
